@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('user_type')->index()->nullable();
-            $table->string('status');
+            $table->string('status')->default('ativo');
             $table->rememberToken();
             $table->timestamps();
 

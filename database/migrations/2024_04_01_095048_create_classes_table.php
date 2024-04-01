@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('descricao');
             $table->unsignedBigInteger('curso_id')->index();
             $table->unsignedBigInteger('instrutor_id')->index();
+            $table->unsignedBigInteger('horario_id')->index();
             $table->timestamps();
 
             $table->foreign('curso_id')
@@ -31,6 +32,9 @@ return new class extends Migration
                 ->references('id')
                 ->on('instrutores');
 
+            $table->foreign('horario_id')
+                ->references('id')
+                ->on('horarios');
         });
     }
 
