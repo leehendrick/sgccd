@@ -1,8 +1,6 @@
 <script setup>
 import {Head} from '@inertiajs/vue3';
-
-
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 import {
   AcademicCapIcon,
   BookOpenIcon,
@@ -13,7 +11,7 @@ import {
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import LandingHeader from "@/Components/LandingHeader.vue";
 
-  const features = [
+const features = [
   {
         name: 'Formadores Qualificados',
         description:
@@ -109,7 +107,9 @@ const cursos = ref([
   }
 ]);
 
+onMounted(() => {
 
+});
 </script>
 
 <template>
