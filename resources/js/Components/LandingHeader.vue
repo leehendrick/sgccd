@@ -6,9 +6,9 @@ import {Link} from "@inertiajs/vue3";
 import {ref} from "vue";
 
 const navigation = [
-  {name: 'Home', href: '#'},
-  {name: 'Inscrições', href: '#'},
-  {name: 'Contatos', href: '#'},
+  {name: 'Home', href: '/'},
+  {name: 'Inscrições', href: 'inscricoes'},
+  {name: 'Contatos', href: 'contatos'},
   {name: 'LabPro', href: '#'},
 ]
 
@@ -50,8 +50,8 @@ defineProps({
         </button>
       </div>
       <div class="hidden lg:flex lg:gap-x-12">
-        <a v-for="item in navigation" :key="item.name" :href="item.href"
-           class="text-lg  leading-6 hover:text-primary transition duration-300 ease-in-out">{{ item.name }}</a>
+        <Link v-for="item in navigation" :key="item.name" :href="item.href"
+           class="text-lg  leading-6 hover:text-primary transition duration-300 ease-in-out">{{ item.name }}</Link>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
@@ -100,10 +100,10 @@ defineProps({
         <div class="mt-6 flow-root">
           <div class="-my-6 divide-y divide-gray-500/10">
             <div class="space-y-2 py-6">
-              <a v-for="item in navigation" :key="item.name" :href="item.href"
+              <Link v-for="item in navigation" :key="item.name" :href="item.href"
                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{
                   item.name
-                }}</a>
+                }}</Link>
             </div>
             <div class="py-6">
               <a href="#"
