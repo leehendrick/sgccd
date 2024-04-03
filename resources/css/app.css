@@ -27,4 +27,14 @@
             blink-caret .5s step-end infinite;
 }
 
+.text {
+    opacity: 0;
+    transform: translateY(50px); /* Deslocamento inicial */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0); /* Deslocamento final */
+}
 
