@@ -1,13 +1,8 @@
 <script setup>
-import {Head, Link} from '@inertiajs/vue3';
+import {Head} from '@inertiajs/vue3';
 
 
-import {onMounted, ref} from 'vue'
-  import {Dialog, DialogPanel} from '@headlessui/vue'
-  import {
-  Bars3Icon,
-  XMarkIcon,
-} from '@heroicons/vue/24/outline'
+import {ref} from 'vue'
 import {
   AcademicCapIcon,
   BookOpenIcon,
