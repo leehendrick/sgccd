@@ -29,8 +29,7 @@ import {
   BookOpenIcon,
   BuildingOffice2Icon,
   CheckBadgeIcon,
-  CheckIcon,
-  UserIcon
+
 } from '@heroicons/vue/20/solid'
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
