@@ -21,11 +21,7 @@ defineProps({
 import {onMounted, ref} from 'vue'
   import {Dialog, DialogPanel} from '@headlessui/vue'
   import {
-  ArrowPathIcon,
   Bars3Icon,
-  CloudArrowUpIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import {
