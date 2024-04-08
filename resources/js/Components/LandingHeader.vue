@@ -4,12 +4,13 @@ import {Bars3Icon, XMarkIcon} from "@heroicons/vue/24/outline/index.js";
 import {Dialog, DialogPanel} from "@headlessui/vue";
 import {Link} from "@inertiajs/vue3";
 import {ref} from "vue";
+import NavLink from "@/Components/NavLink.vue";
 
 const navigation = [
-  {name: 'Home', href: '/'},
-  {name: 'Inscrições', href: 'inscricoes'},
-  {name: 'Contatos', href: 'contatos'},
-  {name: 'LabPro', href: '#'},
+  {name: 'Home', href: '/', },
+  {name: 'Inscrições', href: 'inscricoes', },
+  {name: 'Contatos', href: 'contatos', },
+  {name: 'LabPro', href: '#', },
 ]
 
 const mobileMenuOpen = ref(false)
@@ -50,8 +51,9 @@ defineProps({
         </button>
       </div>
       <div class="hidden lg:flex lg:gap-x-12">
-        <Link v-for="item in navigation" :key="item.name" :href="item.href"
-           class="text-lg  leading-6 hover:text-primary transition duration-300 ease-in-out">{{ item.name }}</Link>
+        <NavLink v-for="item in navigation" :active="$page.component === item.name" :key="item.name" :href="item.href">
+          {{ item.name }}
+        </NavLink>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
