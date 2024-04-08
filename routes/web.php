@@ -17,7 +17,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -26,7 +26,7 @@ Route::get('/', function () {
 });
 
 Route::get('inscricoes', function () {
-   return Inertia::render('LandingPage/Inscricoes', [
+   return Inertia::render('Inscrições', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -35,7 +35,7 @@ Route::get('inscricoes', function () {
 })->name('page.inscricoes');
 
 Route::get('contatos', function () {
-   return Inertia::render('LandingPage/Contatos', [
+   return Inertia::render('Contatos', [
        'canLogin' => Route::has('login'),
        'canRegister' => Route::has('register'),
        'laravelVersion' => Application::VERSION,
