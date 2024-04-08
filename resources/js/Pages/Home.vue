@@ -165,11 +165,11 @@ onMounted(() => {
                 <hr class="my-4 sm:my-8 border-t-2 sm:border-t-4 w-1/2 sm:w-1/4 border-primary mx-auto rounded-full">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                   <div v-for="(curso, index) in cursos" :key="index" class="text-center p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
-                    <div class="bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
+                    <div class="card bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
                       <h3 class="text-lg font-bold mb-2">{{ curso.titulo }}</h3>
                       <p class="text-sm">{{ curso.descricao }}</p>
                       <p class="mt-4 text-gray-500 text-sm">{{ curso.duracao }}</p>
-                      <secondary-button class="mt-5">Inscrever-se</secondary-button>
+                      <secondary-button class="mt-5 my-btn">Inscrever-se</secondary-button>
                     </div>
                   </div>
                 </div>
