@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CursosController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'cursos' => CursosController::index(),
     ]);
 });
 
