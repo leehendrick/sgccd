@@ -124,11 +124,10 @@ onMounted(() => {
           <!-- Outros conteúdos do componente Welcome -->
           <landing-header :canLogin="$page.props.canLogin" :canRegister="$page.props.canRegister" :laravelVersion="$page.props.laravelVersion" :phpVersion="$page.props.phpVersion" />
         </div>
-      <main class="isolate">
+      <main class="isolate ">
         <!-- Feature section -->
         <div class="relative w-full h-screen">
         <img class="w-full h-full object-cover" src="/estudante-sem-fundo.png" alt="Imagem">
-          <img src="/wave-dark-primary.svg" alt="Imagem" class="absolute inset-0 w-full h-full mt-48">
         <div class="absolute inset-0 flex justify-center items-center lg:justify-start">
           <div class="w-full h-full max-w-2xl px-6 py-8  text-white">
             <div class="lg:text-left mt-32 lg:mx-auto">
@@ -138,41 +137,44 @@ onMounted(() => {
             </div>
           </div>
         </div>
-          <div class="container relative overflow-hidden bg-white" style="height: 400px;">
-            <div class="absolute inset-0 flex justify-center items-center">
-              <div class="py-10 px-24 z-10">
-                <dl class="text hidden-scroll grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-                  <div v-for="feature in features" :key="feature.name" class="relative pl-16">
-                    <dt class="text-base font-semibold leading-7 text-gray-900">
-                      <div class="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                        <component :is="feature.icon" class="h-6 w-6 text-white" aria-hidden="true" />
-                      </div>
-                      {{ feature.name }}
-                    </dt>
-                    <dd class="mt-2 text-base leading-7 text-gray-600">{{ feature.description }}</dd>
-                  </div>
-                </dl>
-              </div>
+      </div>
+
+        <div class="container relative md:pt-20 lg:pt-24 pt-13 mt-96 lg:mt-16 xl:mt-20 bg-white">
+          <div class="absolute inset-0 flex justify-center items-center">
+            <div class="py-8 px-4 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-24 mt-8 sm:mt-10 md:mt-12 lg:mt-16 xl:mt-20">
+              <dl class="lg:mt-20 hidden-scroll grid max-w-full md:max-w-xl grid-cols-1 gap-x-8 gap-y-10 sm:gap-y-12 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+                <div v-for="feature in features" :key="feature.name" class="relative pl-8 md:pl-16">
+                  <dt class="text-base sm:text-lg font-semibold leading-7 text-gray-900">
+                    <div class="absolute sm:mr-5 left-0 top-0 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-primary">
+                      <component :is="feature.icon" class="h-5 w-5 sm:h-6 sm:w-6 text-white" aria-hidden="true" />
+                    </div>
+                    {{ feature.name }}
+                  </dt>
+                  <dd class="mt-2 text-sm sm:text-base leading-7 text-gray-600">{{ feature.description }}</dd>
+                </div>
+              </dl>
             </div>
           </div>
-      </div>
-        <div class="mx-auto mt-20 max-w-7xl px-6 sm:mt-56 lg:py-10 lg:px-8">
-          <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-64 lg:max-w-4xl">
-            <div class="w-full">
-              <h2 class="text text-center text-5xl font-bold mb-10 text-primary">Cursos Disponíveis</h2>
-              <hr class="my-8 border-t-4 w-1/4 border-primary mx-auto rounded-full">
-              <div class="flex justify-between ">
-                <div v-for="(curso, index) in cursos" :key="index" class="text mt-9 w-1/3 p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
-                  <div class="bg-white hover:bg-primary border-primary/10 hover:text-white  rounded-lg shadow-md p-6">
-                    <h3 class="text-lg font-bold mb-2">{{ curso.titulo }}</h3>
-                    <p>{{ curso.descricao }}</p>
-                    <p class="mt-4 text-gray-500 text-sm">{{ curso.duracao }}</p>
-                    <secondary-button class="mt-5">Inscrever-se</secondary-button>
+        </div>
+
+        <div class="container md:pt-52 pt-96 mx-auto sm:px-6 lg:px-8">
+          <div class="mx-auto mt-20 lg:mt-0 md:lg:mt-96 sm:mt-72 max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-32 lg:max-w-4xl">
+              <div class="w-full">
+                <h2 class="text-center text-3xl sm:text-5xl font-bold mb-6 sm:mb-10 text-primary">Cursos Disponíveis</h2>
+                <hr class="my-4 sm:my-8 border-t-2 sm:border-t-4 w-1/2 sm:w-1/4 border-primary mx-auto rounded-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                  <div v-for="(curso, index) in cursos" :key="index" class="text-center p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
+                    <div class="bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
+                      <h3 class="text-lg font-bold mb-2">{{ curso.titulo }}</h3>
+                      <p class="text-sm">{{ curso.descricao }}</p>
+                      <p class="mt-4 text-gray-500 text-sm">{{ curso.duracao }}</p>
+                      <secondary-button class="mt-5">Inscrever-se</secondary-button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </main>
