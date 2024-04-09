@@ -177,7 +177,7 @@ const selectedOption = ref('Individual')
           <!-- Segundo contêiner -->
         <div class="w-full md:w-2/5 bg-gray-50 shadow-xl  p-5">
           <!-- Conteúdo do segundo contêiner aqui -->
-          Nkuba
+          Cursos
         </div>
       </div>
 
