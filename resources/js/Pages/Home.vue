@@ -1,5 +1,5 @@
 <script setup>
-import {Head} from '@inertiajs/vue3';
+import {Head, router} from '@inertiajs/vue3';
 import {ref, onMounted} from 'vue'
 import {
   AcademicCapIcon,
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 defineProps({
-  cursos: Array,
+  cursos: Array
 })
 
 </script>
@@ -127,7 +127,7 @@ defineProps({
                             <p class="text-sm">{{ curso.descricao }}</p>
                             <p class="mt-4 text-gray-500 text-sm">{{ curso.duracao }}</p>
                             <p class="mt-4 text-gray-500 text-sm">{{ curso.preco }},00 AOA</p>
-                            <secondary-button class="mt-5 my-btn">Inscrever-se</secondary-button>
+                            <secondary-button class="mt-5 my-btn"><Link :href="route('page.inscricoes')">Inscrever-se</Link></secondary-button>
                           </div>
                         </div>
                       </div>
