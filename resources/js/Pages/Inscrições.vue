@@ -1,6 +1,5 @@
 <script setup>
-import {Head, Link, useForm, usePage} from "@inertiajs/vue3";
-import LandingHeader from "@/Components/LandingHeader.vue";
+import {Head, useForm, usePage} from "@inertiajs/vue3";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
 import {onMounted, ref} from "vue";
 import TextInput from "@/Components/TextInput.vue";
@@ -182,7 +181,7 @@ onMounted(() => {
 
           <!-- Segundo contêiner -->
         <div class="w-full md:w-2/5 bg-gray-50 shadow-xl  p-5">
-          <!-- Conteúdo do segundo contêiner aqui -->
+
           <div class="">
             <div class="text-center p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
               <div class="card bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
