@@ -1,6 +1,8 @@
 <script setup>
-import {Head, router} from '@inertiajs/vue3';
-import {ref, onMounted} from 'vue'
+import {Head,  } from '@inertiajs/vue3';
+import { route } from '@inertiajs/inertia-vue3';
+
+
 import {
   AcademicCapIcon,
   BookOpenIcon,
@@ -9,8 +11,8 @@ import {
 
 } from '@heroicons/vue/20/solid'
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import LandingHeader from "@/Components/LandingHeader.vue";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
+import {Inertia} from "@inertiajs/inertia";
 
 const features = [
   {
@@ -67,6 +69,20 @@ document.addEventListener('DOMContentLoaded', function() {
 defineProps({
   cursos: Array
 })
+
+ async function Inscrever(id){
+  try{
+    window.alert(`id: ${id}`)
+    const response = axios.get(`/inscricoes/${id}`);
+    if (response.status == 200) {
+      location.href = '/inscricoes';
+    }
+  }
+  catch (e){
+
+  }
+
+}
 
 </script>
 
@@ -127,7 +143,7 @@ defineProps({
                             <p class="text-sm">{{ curso.descricao }}</p>
                             <p class="mt-4 text-gray-500 text-sm">{{ curso.duracao }}</p>
                             <p class="mt-4 text-gray-500 text-sm">{{ curso.preco }},00 AOA</p>
-                            <secondary-button class="mt-5 my-btn"><Link :href="route('page.inscricoes')">Inscrever-se</Link></secondary-button>
+                            <secondary-button @click.prevent.default="Inscrever(curso.id)" class="mt-5 my-btn">Inscrever-se</secondary-button>
                           </div>
                         </div>
                       </div>

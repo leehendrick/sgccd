@@ -1,15 +1,14 @@
 <script setup>
-import {Head, Link, useForm} from "@inertiajs/vue3";
+import {Head, Link, useForm, usePage} from "@inertiajs/vue3";
 import LandingHeader from "@/Components/LandingHeader.vue";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import TextInput from "@/Components/TextInput.vue";
 import Checkbox from "@/Components/Checkbox.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Inertia } from "@inertiajs/inertia";
-
 const form = useForm({
   name: '',
   email: '',
@@ -29,6 +28,13 @@ const submit = () => {
   Inertia.post('/inscricoes', form );
 }
 const selectedOption = ref('Individual')
+const curso = ref(null)
+const { props } = usePage();
+
+onMounted(() => {
+  curso.value = props.getCurso;
+  console.log(curso)
+})
 </script>
 
 <template>
@@ -177,7 +183,26 @@ const selectedOption = ref('Individual')
           <!-- Segundo contêiner -->
         <div class="w-full md:w-2/5 bg-gray-50 shadow-xl  p-5">
           <!-- Conteúdo do segundo contêiner aqui -->
-          Cursos
+          <div class="">
+            <div class="text-center p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
+              <div class="card bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-bold mb-2">{{}}</h3>
+                <p class="text-sm">Text</p>
+                <p class="mt-4  text-sm">Text</p>
+                <p class="mt-4  text-sm">Text</p>
+              </div>
+            </div>
+          </div>
+          <div v-if="selectedOption !== 'Individual'" class="">
+            <div class="text-center p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
+              <div class="card bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-bold mb-2">Curso de Informática</h3>
+                <p class="text-sm">Text</p>
+                <p class="mt-4  text-sm">Text</p>
+                <p class="mt-4  text-sm">Text</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
