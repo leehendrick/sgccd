@@ -11,4 +11,13 @@ class CursosController extends Controller
     {
         return Courses::where('status', '=', 'aberto')->get();
     }
+
+    public static function show($cursoId)
+    {
+        $curso  = Courses::findOrFail($cursoId);
+
+        return inertia('Inscrições',[
+            'getCurso' => $curso
+        ]);
+    }
 }
