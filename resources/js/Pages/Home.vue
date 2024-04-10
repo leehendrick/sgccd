@@ -1,6 +1,5 @@
 <script setup>
 import {Head,  } from '@inertiajs/vue3';
-import { route } from '@inertiajs/inertia-vue3';
 
 
 import {
@@ -12,7 +11,6 @@ import {
 } from '@heroicons/vue/20/solid'
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
-import {Inertia} from "@inertiajs/inertia";
 
 const features = [
   {
@@ -74,12 +72,12 @@ defineProps({
   try{
     window.alert(`id: ${id}`)
     const response = axios.get(`/inscricoes/${id}`);
-    if (response.status == 200) {
+    if (response.status === 200) {
       location.href = '/inscricoes';
     }
   }
   catch (e){
-
+    console.log('Error trying to fetch inscricoes')
   }
 
 }
