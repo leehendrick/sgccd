@@ -95,19 +95,19 @@ import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline'
                     <div>
                       <label for="first-name" class="block text-sm font-medium text-gray-900">First name</label>
                       <div class="mt-1">
-                        <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                        <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md  border-secondary focus:border-secondary focus:ring-secondary px-4 py-3 text-gray-900 shadow-sm" />
                       </div>
                     </div>
                     <div>
                       <label for="last-name" class="block text-sm font-medium text-gray-900">Last name</label>
                       <div class="mt-1">
-                        <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                        <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md  border-secondary focus:border-secondary focus:ring-secondary px-4 py-3 text-gray-900 shadow-sm" />
                       </div>
                     </div>
                     <div>
                       <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
                       <div class="mt-1">
-                        <input id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                        <input id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md  border-secondary focus:border-secondary focus:ring-secondary px-4 py-3 text-gray-900 shadow-sm" />
                       </div>
                     </div>
                     <div>
@@ -116,13 +116,13 @@ import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline'
                         <span id="phone-optional" class="text-sm text-gray-500">Optional</span>
                       </div>
                       <div class="mt-1">
-                        <input type="text" name="phone" id="phone" autocomplete="tel" class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" aria-describedby="phone-optional" />
+                        <input type="text" name="phone" id="phone" autocomplete="tel" class="block w-full rounded-md  border-secondary focus:border-secondary focus:ring-secondary px-4 py-3 text-gray-900 shadow-sm" aria-describedby="phone-optional" />
                       </div>
                     </div>
                     <div class="sm:col-span-2">
                       <label for="subject" class="block text-sm font-medium text-gray-900">Subject</label>
                       <div class="mt-1">
-                        <input type="text" name="subject" id="subject" class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+                        <input type="text" name="subject" id="subject" class="block w-full rounded-md  border-secondary focus:border-secondary focus:ring-secondary px-4 py-3 text-gray-900 shadow-sm" />
                       </div>
                     </div>
                     <div class="sm:col-span-2">
@@ -131,7 +131,7 @@ import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline'
                         <span id="message-max" class="text-sm text-gray-500">Max. 500 characters</span>
                       </div>
                       <div class="mt-1">
-                        <textarea id="message" name="message" rows="4" class="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" aria-describedby="message-max" />
+                        <textarea id="message" name="message" rows="4" class="block w-full rounded-md  border-secondary focus:border-secondary focus:ring-secondary px-4 py-3 text-gray-900 shadow-sm " aria-describedby="message-max" />
                       </div>
                     </div>
                     <div class="sm:col-span-2 sm:flex sm:justify-end">
