@@ -32,13 +32,13 @@ class HandleInertiaRequests extends Middleware
     {
         $cursoController = new CursosController();
         $cursos = $cursoController->index();
-
+        //$cursosName = $cursos->pluck('nome', 'id');
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
             ],
-            //'cursos' => $cursos,
+            'cursos' => $cursos,
         ];
     }
 }
