@@ -7,7 +7,8 @@ import Checkbox from "@/Components/Checkbox.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import {Inertia } from "@inertiajs/inertia";
+import {Inertia} from "@inertiajs/inertia";
+
 const form = useForm({
   name: '',
   email: '',
@@ -27,12 +28,32 @@ const submit = () => {
   Inertia.post('/inscricoes', form );
 }
 const selectedOption = ref('Individual')
-const curso = ref(null)
+const cursoSelect = ref('')
+const cursosData = ref([])
+const fills = ref([])
 const { props } = usePage();
 
+fills.value = props.cursos;
+
+async function getCurso(id){
+  const response = await axios.get(`inscricoes/${id}`)
+  if (id === 'Selecione o curso') {
+    cursosData.value = [
+      nome => 'Selecione um curso'
+    ];
+  } else {
+    if (response.status === 200){
+      console.log('Everything looks fine', response.data)
+      cursosData.value = response.data;
+    }
+    else {
+      console.log('Bad thing happened')
+    }
+  }
+}
+
 onMounted(() => {
-  curso.value = props.getCurso;
-  console.log(curso)
+
 })
 </script>
 
@@ -42,11 +63,20 @@ onMounted(() => {
       <section class="relative w-full mr-5 mt-20 p-5">
         <div class="">
           <p>Escolha o tipo de inscrição</p>
-          <div class="my-5">
-              <select v-model="selectedOption" class="border rounded border-secondary focus:border-secondary focus:ring-secondary">
-                <option>Individual</option>
-                <option>Empresarial</option>
+          <div class="inline-flex">
+            <div class="my-5 px-5">
+                <select v-model="selectedOption" class="border rounded border-secondary focus:border-secondary focus:ring-secondary">
+                  <option>Individual</option>
+                  <option>Empresarial</option>
+                </select>
+            </div>
+
+            <div class="my-5">
+              <select @change="getCurso(cursoSelect)" v-model="cursoSelect" class="border rounded border-secondary focus:border-secondary focus:ring-secondary">
+                <option value>Selecione o curso</option>
+                <option v-for="fill in fills" :key="fill.id" :value="fill.id">{{ fill.nome }}</option>
               </select>
+            </div>
           </div>
         </div>
 
@@ -100,7 +130,7 @@ onMounted(() => {
                 </div>
 
                 <div class="mt-4">
-                  <InputLabel for="data_nasci" value="Data de Nacimento" />
+                  <InputLabel for="data_nasci" value="Data de Nascimento" />
 
                   <TextInput
                       id="data_nasci"
@@ -162,7 +192,7 @@ onMounted(() => {
                 <div class="block mt-4">
                   <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
+                    <span class="ms-2 text-sm text-gray-600">Something</span>
                   </label>
                 </div>
 
@@ -184,18 +214,18 @@ onMounted(() => {
 
           <div class="">
             <div class="text-center p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
-              <div class="card bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
-                <h3 class="text-lg font-bold mb-2">{{}}</h3>
-                <p class="text-sm">Text</p>
-                <p class="mt-4  text-sm">Text</p>
-                <p class="mt-4  text-sm">Text</p>
+              <div  v-for="cursoData in cursosData" class="card bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-bold mb-2">{{cursoData.nome}}</h3>
+                <p class="text-sm">{{ cursoData.descricao }}</p>
+                <p class="mt-4  text-sm">{{ cursoData.duracao }}</p>
+                <p class="mt-4  text-sm">{{ cursoData.preco }}</p>
               </div>
             </div>
           </div>
           <div v-if="selectedOption !== 'Individual'" class="">
             <div class="text-center p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
               <div class="card bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
-                <h3 class="text-lg font-bold mb-2">Curso de Informática</h3>
+                <h3 class="text-lg font-bold mb-2"></h3>
                 <p class="text-sm">Text</p>
                 <p class="mt-4  text-sm">Text</p>
                 <p class="mt-4  text-sm">Text</p>
