@@ -14,10 +14,13 @@ class CursosController extends Controller
 
     public static function show($cursoId)
     {
-        $curso  = Courses::findOrFail($cursoId);
+        $curso  = Courses::find($cursoId);
+        if ($curso){
+            return response()->json([$curso], status: 200);
+        }
+        else{
+            return response()->json(['ERROR' => 'Nenhum curso encontrado'], status: 404);
+        }
 
-        return inertia('Inscrições',[
-            'getCurso' => $curso
-        ]);
     }
 }
