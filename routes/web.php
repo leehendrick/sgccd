@@ -37,7 +37,9 @@ Route::get('inscricoes', function () {
 })->name('page.inscricoes');
 
 
-Route::get('/inscricoes/{curso}', [CursosController::class, 'show'])->name('cursos.show');
+Route::get('inscricoes/{cursoId}', function ($id) {
+    return CursosController::show($id);
+})->name('cursos.show');
 
 Route::get('contatos', function () {
    return Inertia::render('Contatos', [
