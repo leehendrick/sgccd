@@ -72,7 +72,9 @@ onMounted(() => {
             </div>
 
             <div class="my-5">
-              <select @change="getCurso(cursoSelect)" v-model="cursoSelect" class="border rounded border-secondary focus:border-secondary focus:ring-secondary">
+              <select @change="getCurso(cursoSelect)"
+                      v-model="cursoSelect"
+                      class="border rounded border-secondary focus:border-secondary focus:ring-secondary">
                 <option value>Selecione o curso</option>
                 <option v-for="fill in fills" :key="fill.id" :value="fill.id">{{ fill.nome }}</option>
               </select>
