@@ -218,7 +218,7 @@ onMounted(() => {
                 <h3 class="text-lg font-bold mb-2">{{cursoData.nome}}</h3>
                 <p class="text-sm">{{ cursoData.descricao }}</p>
                 <p class="mt-4  text-sm">{{ cursoData.duracao }}</p>
-                <p class="mt-4  text-sm">{{ cursoData.preco }}</p>
+                <p class="mt-4  text-sm">{{ cursoData.preco }},00Kz</p>
               </div>
             </div>
           </div>
