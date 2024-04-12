@@ -6,7 +6,6 @@ import {
   BookOpenIcon,
   BuildingOffice2Icon,
   CheckBadgeIcon,
-
 } from '@heroicons/vue/20/solid'
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
