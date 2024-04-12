@@ -84,7 +84,7 @@ onMounted(() => {
 
         <div class="flex flex-col md:flex-row">
         <!-- Primeiro contêiner -->
-          <div v-if="selectedOption !== 'Empresarial'"  class="border-r-2 border-primary w-full shadow-xl md:w-3/5 bg-gray-50 flex justify-center items-center">
+          <div v-if="selectedOption !== 'Empresarial'"  class="sm:border-r-0 sm:border-none border-r-2 border-primary w-full shadow-xl md:w-3/5 bg-gray-50 flex justify-center items-center">
             <div class="p-5">
               <form @submit.prevent="submit" class="w-96">
                 <div class="mt-4 w-full">
@@ -205,7 +205,7 @@ onMounted(() => {
             </div>
           </div>
 
-          <div  v-if="selectedOption !== 'Individual'" class="border-r-2 border-primary w-full shadow-xl md:w-3/5 bg-gray-50 flex justify-center items-center">
+          <div  v-if="selectedOption !== 'Individual'" class="sm:border-r-0 sm:border-none border-r-2 border-primary w-full shadow-xl md:w-3/5 bg-gray-50 flex justify-center items-center">
             <div class="p-5">
               <p>Individual</p>
             </div>
@@ -220,7 +220,7 @@ onMounted(() => {
                 <h3 class="text-lg font-bold mb-2">{{cursoData.nome}}</h3>
                 <p class="text-sm">{{ cursoData.descricao }}</p>
                 <p class="mt-4  text-sm">{{ cursoData.duracao }}</p>
-                <p class="mt-4  text-sm">{{ cursoData.preco }},00Kz</p>
+                <p class="mt-4  text-sm">{{ cursoData.preco}}</p>
               </div>
             </div>
           </div>
