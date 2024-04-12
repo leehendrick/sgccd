@@ -19,11 +19,6 @@ const footerNavigation = {
     {name: 'Press', href: '#'},
     {name: 'Partners', href: '#'},
   ],
-  legal: [
-    {name: 'Claim', href: '#'},
-    {name: 'Privacy', href: '#'},
-    {name: 'Terms', href: '#'},
-  ],
 }
 
 </script>
@@ -38,17 +33,24 @@ const footerNavigation = {
         <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-sm font-semibold leading-6 text-primary">Solutions</h3>
+              <h3 class="text-sm font-semibold leading-6 text-primary">Inscrições</h3>
               <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in footerNavigation.solutions" :key="item.name">
-                  <a :href="item.href" class="text-sm leading-6 text-white hover:text-altern">{{ item.name }}</a>
+                <li
+                    v-for="item in footerNavigation.solutions"
+                    :key="item.name"
+                >
+                  <a
+                      :href="item.href"
+                      class="text-sm leading-6 text-white hover:text-altern">{{ item.name }}</a>
                 </li>
               </ul>
             </div>
             <div class="mt-10 md:mt-0">
-              <h3 class="text-sm font-semibold leading-6 text-primary">Support</h3>
+              <h3 class="text-sm font-semibold leading-6 text-primary">Contatos</h3>
               <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in footerNavigation.support" :key="item.name">
+                <li
+                    v-for="item in footerNavigation.support"
+                    :key="item.name">
                   <a :href="item.href" class="text-sm leading-6 text-white hover:hover:text-altern">{{ item.name }}</a>
                 </li>
               </ul>
@@ -56,17 +58,11 @@ const footerNavigation = {
           </div>
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-sm font-semibold leading-6 text-primary">Company</h3>
+              <h3 class="text-sm font-semibold leading-6 text-primary">LabPro</h3>
               <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in footerNavigation.company" :key="item.name">
-                  <a :href="item.href" class="text-sm leading-6 text-white hover:hover:text-altern">{{ item.name }}</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-10 md:mt-0">
-              <h3 class="text-sm font-semibold leading-6 text-primary">Legal</h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in footerNavigation.legal" :key="item.name">
+                <li
+                    v-for="item in footerNavigation.company"
+                    :key="item.name">
                   <a :href="item.href" class="text-sm leading-6 text-white hover:hover:text-altern">{{ item.name }}</a>
                 </li>
               </ul>
