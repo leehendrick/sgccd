@@ -21,7 +21,6 @@ const form = useForm({
   telefone: '',
   curso_id: '',
   nivel_academic: '',
-  remember: false,
 });
 
 const submit = () => {
@@ -183,11 +182,10 @@ onMounted(() => {
 
                   <TextInput
                       id="telefone"
-                      type="number"
+                      type="text"
                       class="mt-1 block w-full"
                       v-model="form.telefone"
                       required
-                      autocomplete="current-password"
                   />
 
                   <InputError class="mt-2" :message="form.errors.telefone" />
