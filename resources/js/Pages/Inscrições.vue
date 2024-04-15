@@ -28,12 +28,15 @@ const submit = () => {
   Inertia.post('/inscricoes', form );
 }
 const selectedOption = ref('Individual')
+const academicLevel = ref('Individual')
 const cursoSelect = ref('')
 const cursosData = ref([])
 const fills = ref([])
+const academic_level = ref([])
 const { props } = usePage();
 
 fills.value = props.cursos;
+academic_level.value = props.academic_level;
 
 async function getCurso(id){
   const response = await axios.get(`inscricoes/${id}`)
@@ -191,11 +194,12 @@ onMounted(() => {
                 </div>
 
                 <div class="my-5">
+                  <InputLabel for="academicLevel" value="Selecione o nível acadêmico" />
                   <select
                           v-model="academicLevel"
-                          class="border rounded border-secondary focus:border-secondary focus:ring-secondary">
-                    <option value>Selecione o nível acadêmico</option>
-                    <option v-for="fill in fills" :key="fill.id" :value="fill.id">{{ fill.nome }}</option>
+                          id="academicLevel"
+                          class="border mt-2 rounded border-secondary focus:border-secondary focus:ring-secondary">
+                    <option v-for="item in academic_level" :key="item.id" :value="item.id">{{ item.nome }}</option>
                   </select>
                 </div>
 
