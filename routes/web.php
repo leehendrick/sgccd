@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CursosController;
 use App\Http\Controllers\ProfileController;
+use http\Client\Request;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,6 +36,9 @@ Route::get('inscricoes', function () {
    ]);
 })->name('page.inscricoes');
 
+Route::post('inscricoes', function (){
+
+});
 
 Route::get('inscricoes/{cursoId}', function ($id) {
     return CursosController::show($id);
