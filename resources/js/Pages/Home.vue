@@ -99,10 +99,15 @@ defineProps({
                 <div class="absolute inset-0 flex justify-center items-center">
                   <div class="py-8 px-4 sm:px-8 md:px-10 lg:px-12 xl:px-16 2xl:px-24 mt-8 sm:mt-10 md:mt-12 lg:mt-16 xl:mt-20">
                     <dl class="lg:mt-20 hidden-scroll grid max-w-full md:max-w-xl grid-cols-1 gap-x-8 gap-y-10 sm:gap-y-12 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-                      <div v-for="feature in features" :key="feature.name" class="relative pl-8 md:pl-16">
+                      <div
+                          v-for="feature in features"
+                          :key="feature.name" class="relative pl-8 md:pl-16">
                         <dt class="text-base sm:text-lg font-semibold leading-7 text-gray-900">
                           <div class="absolute sm:mr-5 left-0 top-0 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-primary">
-                            <component :is="feature.icon" class="h-5 w-5 sm:h-6 sm:w-6 text-white" aria-hidden="true" />
+                            <component
+                                :is="feature.icon"
+                                class="h-5 w-5 sm:h-6 sm:w-6 text-white"
+                                aria-hidden="true" />
                           </div>
                           {{ feature.name }}
                         </dt>
