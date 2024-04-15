@@ -17,10 +17,10 @@ use Inertia\Inertia;
 |
 */
 
+
 Route::get('/', function () {
     return Inertia::render('Home', [
         'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
         'cursos' => CursosController::index(),
@@ -30,7 +30,6 @@ Route::get('/', function () {
 Route::get('inscricoes', function () {
    return Inertia::render('Inscrições', [
         'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
    ]);
@@ -44,7 +43,6 @@ Route::get('inscricoes/{cursoId}', function ($id) {
 Route::get('contatos', function () {
    return Inertia::render('Contatos', [
        'canLogin' => Route::has('login'),
-       'canRegister' => Route::has('register'),
        'laravelVersion' => Application::VERSION,
        'phpVersion' => PHP_VERSION,
    ]);
