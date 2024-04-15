@@ -70,7 +70,6 @@ onMounted(() => {
                   <option>Empresarial</option>
                 </select>
             </div>
-
             <div class="my-5">
               <select @change="getCurso(cursoSelect)"
                       v-model="cursoSelect"
@@ -189,6 +188,15 @@ onMounted(() => {
                   />
 
                   <InputError class="mt-2" :message="form.errors.telefone" />
+                </div>
+
+                <div class="my-5">
+                  <select
+                          v-model="academicLevel"
+                          class="border rounded border-secondary focus:border-secondary focus:ring-secondary">
+                    <option value>Selecione o nível acadêmico</option>
+                    <option v-for="fill in fills" :key="fill.id" :value="fill.id">{{ fill.nome }}</option>
+                  </select>
                 </div>
 
                 <div class="block mt-4">
