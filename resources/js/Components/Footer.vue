@@ -1,23 +1,20 @@
 <script setup>
 const footerNavigation = {
   solutions: [
-    {name: 'Hosting', href: '#'},
-    {name: 'Data Services', href: '#'},
-    {name: 'Uptime Monitoring', href: '#'},
-    {name: 'Enterprise Services', href: '#'},
+    {name: 'Fazer Inscrição', href: '#'},
+
   ],
   support: [
-    {name: 'Pricing', href: '#'},
-    {name: 'Documentation', href: '#'},
-    {name: 'Guides', href: '#'},
-    {name: 'API Reference', href: '#'},
+    {name: 'example@lab.co.ao', href: '#'},
+    {name: '+244 987 123 456', href: '#'},
+    {name: '1230 Maecenas Street Donec Road\n' +
+          '\n' +
+          'New York, EEUU', href: '#'},
   ],
   company: [
-    {name: 'About', href: '#'},
-    {name: 'Blog', href: '#'},
-    {name: 'Jobs', href: '#'},
-    {name: 'Press', href: '#'},
-    {name: 'Partners', href: '#'},
+    {name: 'About', href: 'https://www.isptec.co.ao/laboratorios-profissionalizantes/'},
+    {name: 'Isptec', href: 'https://www.isptec.co.ao/'},
+
   ],
 }
 
