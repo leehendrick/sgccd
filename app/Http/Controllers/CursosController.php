@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicLevel;
 use App\Models\Courses;
 
 class CursosController extends Controller
@@ -22,5 +23,10 @@ class CursosController extends Controller
             return response()->json(['ERROR' => 'Nenhum curso encontrado'], status: 404);
         }
 
+    }
+
+    public static function getAllAcademicLevel()
+    {
+        return AcademicLevel::all();
     }
 }
