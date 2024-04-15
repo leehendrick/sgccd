@@ -32,6 +32,7 @@ class HandleInertiaRequests extends Middleware
     {
         $cursoController = new CursosController();
         $cursos = $cursoController->index();
+        $academicLevel = $cursoController->getAllAcademicLevel();
         //$cursosName = $cursos->pluck('nome', 'id');
         return [
             ...parent::share($request),
@@ -39,6 +40,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'cursos' => $cursos,
+            'academic_level' => $academicLevel,
         ];
     }
 }
