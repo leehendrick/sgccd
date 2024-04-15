@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogPanel,
   Menu,
-  MenuButton,
   MenuItem,
   MenuItems,
   TransitionChild,
@@ -23,10 +22,9 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
+import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import DropdownLink from "@/Components/DropdownLink.vue";
 import Dropdown from "@/Components/Dropdown.vue";
-import NavLink from "@/Components/NavLink.vue";
 import DashLink from "@/Components/DashLink.vue";
 
 const navigation = [
