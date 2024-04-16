@@ -3,7 +3,6 @@ import {Head, useForm, usePage} from "@inertiajs/vue3";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
 import {onMounted, ref} from "vue";
 import TextInput from "@/Components/TextInput.vue";
-import Checkbox from "@/Components/Checkbox.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -16,18 +15,19 @@ const form = useForm({
   data_nascimento: '',
   instituicao: '',
   area_formacao: '',
-  data_inscricao: '',
-  genero: '',
-  telefone: '',
-  curso_id: '',
-  nivel_academic: '',
+  data_inscricao: '2024-04-02',
+  genero: 'M',
+  telefone: 0,
+  curso_id: 0,
+  nivel_academic: 0,
 });
 
 const submit = () => {
   Inertia.post('/inscricoes', form );
 }
+
 const selectedOption = ref('Individual')
-const academicLevel = ref('Individual')
+const academicLevel = ref('')
 const cursoSelect = ref('')
 const cursosData = ref([])
 const fills = ref([])
@@ -39,24 +39,20 @@ academic_level.value = props.academic_level;
 
 async function getCurso(id){
   const response = await axios.get(`inscricoes/${id}`)
-  if (id === 'Selecione o curso') {
-    cursosData.value = [
-      nome => 'Selecione um curso'
-    ];
-  } else {
     if (response.status === 200){
       console.log('Everything looks fine', response.data)
       cursosData.value = response.data;
+      form.curso_id = id;
     }
     else {
       console.log('Bad thing happened')
     }
-  }
 }
 
 onMounted(() => {
 
 })
+
 </script>
 
 <template>
@@ -180,13 +176,7 @@ onMounted(() => {
                 <div class="mt-4">
                   <InputLabel for="telefone" value="Telefone" />
 
-                  <TextInput
-                      id="telefone"
-                      type="text"
-                      class="mt-1 block w-full"
-                      v-model="form.telefone"
-                      required
-                  />
+                  <input id="telefone" v-model="form.telefone" required type="number" class="mt-1 block w-full border-secondary focus:border-secondary focus:ring-secondary rounded-md shadow-sm"/>
 
                   <InputError class="mt-2" :message="form.errors.telefone" />
                 </div>
@@ -195,15 +185,17 @@ onMounted(() => {
                   <InputLabel for="academicLevel" value="Selecione o nível acadêmico" />
                   <select
                           v-model="academicLevel"
+                          @change="form.nivel_academic = academicLevel"
                           id="academicLevel"
                           class="border mt-2 rounded border-secondary focus:border-secondary focus:ring-secondary">
+                    <option>Selecione um opção</option>
                     <option v-for="item in academic_level" :key="item.id" :value="item.id">{{ item.nome }}</option>
                   </select>
                 </div>
 
                 <div class="block mt-4">
                   <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
+
                     <span class="ms-2 text-sm text-gray-600">Something</span>
                   </label>
                 </div>

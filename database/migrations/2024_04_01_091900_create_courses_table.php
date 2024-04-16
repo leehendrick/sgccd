@@ -19,7 +19,7 @@ return new class extends Migration
             $table->double('preco');
             $table->date('data_inicio');
             $table->date('data_termino');
-            $table->date('local');
+            $table->string('local');
             $table->integer('vagas');
             $table->string('requisitos');
             $table->string('status');
