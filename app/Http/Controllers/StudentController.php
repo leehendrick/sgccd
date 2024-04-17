@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function store(Request $request)
+    public static function store(Request $request)
     {
         $request->validate([
             'nome' => 'required',
