@@ -12,13 +12,9 @@ import {
 } from '@headlessui/vue'
 
 import {
-  DocumentDuplicateIcon,
   Cog6ToothIcon,
-  ChartPieIcon,
-  CalendarIcon,
   BellIcon,
   Bars3Icon,
-  FolderIcon,
   HomeIcon,
   AcademicCapIcon,
   InboxArrowDownIcon,
