@@ -3,6 +3,7 @@
 use App\Http\Controllers\CursosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
+use App\Models\Students;
 use http\Client\Request;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +38,23 @@ Route::get('inscricoes', function () {
    ]);
 })->name('page.inscricoes');
 
-Route::post('inscricoes', function () {
-    return StudentController::store();
+Route::post('inscricoes/create', function () {
+    $attributes = request()->validate([
+        'nome' => 'required',
+        'email' => 'required | email',
+        'bi' => 'required',
+        'data_nascimento' => 'required',
+        'instituicao' => 'required',
+        'area_formacao' => 'required',
+        'data_inscricao' => 'required',
+        'genero' => 'required',
+        'telefone' => 'required',
+        'curso_id' => 'required',
+        'nivel_academico' => 'required',
+    ]);
+    Students::create($attributes);
+
+    return redirect('/');
 });
 
 Route::get('inscricoes/{cursoId}', function ($id) {
