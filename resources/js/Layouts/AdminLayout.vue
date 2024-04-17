@@ -29,11 +29,11 @@ import DashLink from "@/Components/DashLink.vue";
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'Team', href: '', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+  { name: 'Inscrições', href: '', icon: UsersIcon, current: false },
+  { name: 'Cursos', href: '#', icon: FolderIcon, current: false },
+  { name: 'Turmas', href: '#', icon: CalendarIcon, current: false },
+  { name: 'Formadores', href: '#', icon: DocumentDuplicateIcon, current: false },
+  { name: 'Formandos', href: '#', icon: ChartPieIcon, current: false },
 ]
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
