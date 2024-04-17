@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CursosController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
 use http\Client\Request;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -36,8 +37,8 @@ Route::get('inscricoes', function () {
    ]);
 })->name('page.inscricoes');
 
-Route::post('inscricoes', function (){
-
+Route::post('inscricoes', function () {
+    return StudentController::store();
 });
 
 Route::get('inscricoes/{cursoId}', function ($id) {
