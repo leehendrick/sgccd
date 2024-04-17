@@ -9,7 +9,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {Inertia} from "@inertiajs/inertia";
 
 const form = useForm({
-  name: '',
+  nome: '',
   email: '',
   bi: '',
   data_nascimento: '',
@@ -19,11 +19,11 @@ const form = useForm({
   genero: 'M',
   telefone: 0,
   curso_id: 0,
-  nivel_academic: 0,
+  nivel_academico_id: 0,
 });
 
 const submit = () => {
-  Inertia.post('/inscricoes', form );
+  Inertia.post('inscricoes/create', form );
 }
 
 const selectedOption = ref('Individual')
@@ -42,7 +42,6 @@ async function getCurso(id){
     if (response.status === 200){
       console.log('Everything looks fine', response.data)
       cursosData.value = response.data;
-      form.curso_id = id;
     }
     else {
       console.log('Bad thing happened')
@@ -69,7 +68,7 @@ onMounted(() => {
                 </select>
             </div>
             <div class="my-5">
-              <select @change="getCurso(cursoSelect)"
+              <select @change="getCurso(cursoSelect); form.curso_id = cursoSelect; console.log(form.curso_id)"
                       v-model="cursoSelect"
                       class="border rounded border-secondary focus:border-secondary focus:ring-secondary">
                 <option value>Selecione o curso</option>
@@ -91,7 +90,7 @@ onMounted(() => {
                       id="name"
                       type="text"
                       class="mt-1 block w-full"
-                      v-model="form.name"
+                      v-model="form.nome"
                       required
                   />
 
@@ -185,7 +184,7 @@ onMounted(() => {
                   <InputLabel for="academicLevel" value="Selecione o nível acadêmico" />
                   <select
                           v-model="academicLevel"
-                          @change="form.nivel_academic = academicLevel"
+                          @change="form.nivel_academico_id = academicLevel"
                           id="academicLevel"
                           class="border mt-2 rounded border-secondary focus:border-secondary focus:ring-secondary">
                     <option>Selecione um opção</option>
