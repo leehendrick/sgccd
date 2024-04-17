@@ -19,5 +19,7 @@ class Students extends Model
         'data_inscricao',
         'genero',
         'telefone',
+        'curso_id',
+        'nivel_academico_id',
     ];
 }
