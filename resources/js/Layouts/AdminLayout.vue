@@ -10,30 +10,33 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
+
 import {
-  Bars3Icon,
-  BellIcon,
-  CalendarIcon,
-  ChartPieIcon,
-  Cog6ToothIcon,
   DocumentDuplicateIcon,
+  Cog6ToothIcon,
+  ChartPieIcon,
+  CalendarIcon,
+  BellIcon,
+  Bars3Icon,
   FolderIcon,
   HomeIcon,
-  UsersIcon,
+  AcademicCapIcon,
+  InboxArrowDownIcon,
+  MagnifyingGlassIcon,
   XMarkIcon,
-} from '@heroicons/vue/24/outline'
-import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
+  UsersIcon, UserGroupIcon, BuildingOfficeIcon
+} from '@heroicons/vue/20/solid'
 import DropdownLink from "@/Components/DropdownLink.vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DashLink from "@/Components/DashLink.vue";
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'Inscrições', href: '', icon: UsersIcon, current: false },
-  { name: 'Cursos', href: '#', icon: FolderIcon, current: false },
-  { name: 'Turmas', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Formadores', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Formandos', href: '#', icon: ChartPieIcon, current: false },
+  { name: 'Inscrições', href: '', icon: InboxArrowDownIcon, current: false },
+  { name: 'Cursos', href: '#', icon: AcademicCapIcon, current: false },
+  { name: 'Turmas', href: '#', icon: BuildingOfficeIcon, current: false },
+  { name: 'Formadores', href: '#', icon: UsersIcon, current: false },
+  { name: 'Formandos', href: '#', icon: UserGroupIcon, current: false },
 ]
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
