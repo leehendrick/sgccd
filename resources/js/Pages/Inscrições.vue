@@ -6,7 +6,6 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import {Inertia} from "@inertiajs/inertia";
 
 const form = useForm({
   nome: '',
@@ -15,15 +14,16 @@ const form = useForm({
   data_nascimento: '',
   instituicao: '',
   area_formacao: '',
-  data_inscricao: '2024-04-02',
-  genero: 'M',
+  data_inscricao: '',
+  genero: '',
   telefone: 0,
   curso_id: 0,
   nivel_academico_id: 0,
 });
 
 const submit = () => {
-  axios.post('inscricoes/create', form );
+
+  form.post('inscricoes/create', form);
 }
 
 const selectedOption = ref('Individual')
@@ -32,6 +32,7 @@ const cursoSelect = ref('')
 const cursosData = ref([])
 const fills = ref([])
 const academic_level = ref([])
+const genero = ref([])
 const { props } = usePage();
 
 fills.value = props.cursos;
@@ -48,8 +49,19 @@ async function getCurso(id){
     }
 }
 
-onMounted(() => {
+function getCurrentDate(){
+  const today = new Date();
+  const options = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
+  form.data_inscricao = today.toLocaleDateString()
+  console.log(form.data_inscricao)
+}
 
+onMounted(() => {
+  getCurrentDate()
 })
 
 </script>
@@ -186,10 +198,21 @@ onMounted(() => {
                           v-model="academicLevel"
                           @change="form.nivel_academico_id = academicLevel"
                           id="academicLevel"
-                          class="border mt-2 rounded border-secondary focus:border-secondary focus:ring-secondary">
+                          class="w-full border mt-2 rounded border-secondary focus:border-secondary focus:ring-secondary">
                     <option>Selecione um opção</option>
                     <option v-for="item in academic_level" :key="item.id" :value="item.id">{{ item.nome }}</option>
                   </select>
+                </div>
+                <div class="my-5">
+                  <InputLabel for="academicLevel" value="Selecione o gênero" />
+                  <select
+                          v-model="genero"
+                          @change="form.genero = genero"
+                          id="academicLevel"
+                          class="w-full border mt-2 rounded border-secondary focus:border-secondary focus:ring-secondary">
+                    <option>M</option>
+                    <option>F</option>
+                   </select>
                 </div>
 
                 <div class="block mt-4">
