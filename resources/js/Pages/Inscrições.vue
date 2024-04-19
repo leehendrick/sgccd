@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const submit = () => {
-  Inertia.post('inscricoes/create', form );
+  axios.post('inscricoes/create', form );
 }
 
 const selectedOption = ref('Individual')
