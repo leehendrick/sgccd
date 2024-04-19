@@ -125,7 +125,7 @@ defineProps({
                       <h2 class="text-center text-3xl sm:text-5xl font-bold mb-6 sm:mb-10 text-primary">Cursos Disponíveis</h2>
                       <hr class="my-4 sm:my-8 border-t-2 sm:border-t-4 w-1/2 sm:w-1/4 border-primary mx-auto rounded-full">
                       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                        <div v-for="(curso, index) in cursos" :key="index" class="bg-amber-200 hover:bg-amber-900 text-center p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
+                        <div v-for="(curso, index) in cursos" :key="index" class="bg-amber-200 text-center p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
                           <div class="card bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
                             <h3 class="text-lg font-bold mb-2">{{ curso.nome }}</h3>
                             <p class="text-sm">{{ curso.descricao }}</p>
