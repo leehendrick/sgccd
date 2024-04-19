@@ -79,7 +79,7 @@ onMounted(() => {
         </div>
       </div>
     <div class="mt-6 ml-5">
-      Paginator
+      Paginação
     </div>
   </admin-layout>
 </template>
