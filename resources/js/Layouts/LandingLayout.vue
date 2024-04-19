@@ -10,7 +10,7 @@ import Footer from "@/Components/Footer.vue";
       :laravelVersion="$page.props.laravelVersion"
       :phpVersion="$page.props.phpVersion"
   />
-  <slot/>
+   <slot/>
   <Footer/>
 </template>
 
