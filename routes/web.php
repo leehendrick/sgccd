@@ -32,7 +32,7 @@ Route::get('/', function () {
 
 //Rota para inscrições
 Route::get('inscricoes', function () {
-   return Inertia::render('Inscrições', [
+   return Inertia::render('Inscrições.vue', [
         'canLogin' => Route::has('login'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
@@ -54,6 +54,10 @@ Route::post('inscricoes/create', function () {
         'nivel_academico_id' => 'required',
     ]);
     Students::create($attributes);
+
+    return Inertia::render('Inscrições.vue', [
+       'alert' => true,
+    ]);
 });
 
 Route::get('inscricoes/{cursoId}', function ($id) {
@@ -73,6 +77,12 @@ Route::get('contatos', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard/inscricoes', function () {
+    return Inertia::render('Dash/Inscrições',[
+        'values' => Students::paginate(3),
+    ]);
+})->middleware(['auth', 'verified'])->name('dahsboard.inscricoes');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
