@@ -51,12 +51,10 @@ async function getCurso(id){
 
 function getCurrentDate(){
   const today = new Date();
-  const options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }
-  form.data_inscricao = today.toLocaleDateString()
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const day = today.getDate().toString().padStart(2, '0');
+  form.data_inscricao = `${year}-${month}-${day}`;
   console.log(form.data_inscricao)
 }
 
