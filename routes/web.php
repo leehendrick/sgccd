@@ -50,11 +50,9 @@ Route::post('inscricoes/create', function () {
         'genero' => 'required',
         'telefone' => 'required',
         'curso_id' => 'required',
-        'nivel_academico' => 'required',
+        'nivel_academico_id' => 'required',
     ]);
     Students::create($attributes);
-
-    return redirect('/');
 });
 
 Route::get('inscricoes/{cursoId}', function ($id) {
