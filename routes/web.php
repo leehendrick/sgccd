@@ -30,6 +30,7 @@ Route::get('/', function () {
     ]);
 });
 
+//Rota para inscrições
 Route::get('inscricoes', function () {
    return Inertia::render('Inscrições', [
         'canLogin' => Route::has('login'),
@@ -59,6 +60,7 @@ Route::get('inscricoes/{cursoId}', function ($id) {
     return CursosController::show($id);
 })->name('cursos.show');
 
+//Rotas para contatos
 Route::get('contatos', function () {
    return Inertia::render('Contatos', [
        'canLogin' => Route::has('login'),
@@ -67,7 +69,7 @@ Route::get('contatos', function () {
    ]);
 })->name('page.contatos');
 
-
+//Rotas...
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
