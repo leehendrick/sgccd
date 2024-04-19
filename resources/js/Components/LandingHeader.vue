@@ -8,7 +8,7 @@ import NavLink from "@/Components/NavLink.vue";
 
 const navigation = [
   {name: 'Home', href: '/', },
-  {name: 'Inscrições', href: 'inscricoes', },
+  {name: 'Inscrições.vue', href: 'inscricoes', },
   {name: 'Contatos', href: 'contatos', },
   {name: 'LabPro', href: '#', },
 ]
