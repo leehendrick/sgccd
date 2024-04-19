@@ -6,6 +6,7 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Swal from "sweetalert2";
 
 const form = useForm({
   nome: '',
@@ -20,6 +21,15 @@ const form = useForm({
   curso_id: 0,
   nivel_academico_id: 0,
 });
+const selectedOption = ref('Individual')
+const academicLevel = ref('')
+const cursoSelect = ref('')
+const cursosData = ref([])
+const fills = ref([])
+const academic_level = ref([])
+const genero = ref([])
+const { props } = usePage();
+const alert = props.alert;
 
 const submit = () => {
   if (form.curso_id === 0 || form.nivel_academico_id === 0){
@@ -29,27 +39,15 @@ const submit = () => {
   }
 }
 
-const selectedOption = ref('Individual')
-const academicLevel = ref('')
-const cursoSelect = ref('')
-const cursosData = ref([])
-const fills = ref([])
-const academic_level = ref([])
-const genero = ref([])
-const { props } = usePage();
-
-fills.value = props.cursos;
-academic_level.value = props.academic_level;
-
 async function getCurso(id){
   const response = await axios.get(`inscricoes/${id}`)
-    if (response.status === 200){
-      console.log('Everything looks fine', response.data)
-      cursosData.value = response.data;
-    }
-    else {
-      console.log('Bad thing happened')
-    }
+  if (response.status === 200){
+    console.log('Everything looks fine', response.data)
+    cursosData.value = response.data;
+  }
+  else {
+    console.log('Bad thing happened')
+  }
 }
 
 function getCurrentDate(){
@@ -60,6 +58,18 @@ function getCurrentDate(){
   form.data_inscricao = `${year}-${month}-${day}`;
   console.log(form.data_inscricao)
 }
+
+
+/** Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Your work has been saved",
+    showConfirmButton: false,
+    timer: 1500
+  }); **/
+
+fills.value = props.cursos;
+academic_level.value = props.academic_level;
 
 onMounted(() => {
   getCurrentDate()
