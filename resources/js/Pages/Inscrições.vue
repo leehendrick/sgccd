@@ -22,8 +22,11 @@ const form = useForm({
 });
 
 const submit = () => {
-
-  form.post('inscricoes/create', form);
+  if (form.curso_id === 0 || form.nivel_academico_id === 0){
+    alert('Selecione o curso e o Nível Acadêmico')
+  }else {
+    form.post('inscricoes/create', form);
+  }
 }
 
 const selectedOption = ref('Individual')
