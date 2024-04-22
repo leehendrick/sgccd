@@ -2,6 +2,8 @@
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import {onMounted, ref} from "vue";
 import {usePage} from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
+import Pagination from "@/Components/Pagination.vue";
 
 const { props } = usePage();
 
@@ -78,9 +80,8 @@ onMounted(() => {
           </div>
         </div>
       </div>
-    <div class="mt-6 ml-5">
-      Paginação
-    </div>
+      <!-- Paginator -->
+      <Pagination :links="values.links" class="mt-6"/>
   </admin-layout>
 </template>
 
