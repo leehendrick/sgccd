@@ -32,7 +32,7 @@ Route::get('/', function () {
 
 //Rota para inscrições
 Route::get('inscricoes', function () {
-   return Inertia::render('Inscrições.vue', [
+   return Inertia::render('Inscrições', [
         'canLogin' => Route::has('login'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
