@@ -1,16 +1,20 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import {onMounted, ref} from "vue";
-import {usePage} from "@inertiajs/vue3";
-import { Link } from "@inertiajs/vue3";
+import {onMounted, ref, watch} from "vue";
 import Pagination from "@/Components/Pagination.vue";
+import {Inertia} from "@inertiajs/inertia";
 
-const { props } = usePage();
 
-const people = ref([])
+const search = ref('');
 
 defineProps({
   values: Object,
+})
+
+watch(search, value => {
+  Inertia.get('/solicitacoes', { search: value }, {
+    preserveState: true
+  });
 })
 
 onMounted(() => {
@@ -20,14 +24,14 @@ onMounted(() => {
 
 <template>
   <admin-layout>
-    <h1>Dashboard\Inscrições</h1>
       <div class="px-4 sm:px-6 lg:px-8 mt-10">
         <div class="sm:flex sm:items-center">
           <div class="sm:flex-auto">
-            <h1 class="text-base font-semibold leading-6 text-gray-900">Users</h1>
+            <h1 class="text-base font-semibold leading-6 text-gray-900">Solicitações</h1>
             <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title,
               email and role.</p>
           </div>
+          <input v-model="search" type="text" placeholder="Search...">
           <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
             <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add user</button>
           </div>
