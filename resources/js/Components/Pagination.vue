@@ -13,7 +13,7 @@
         v-html="link.label"
         :class="{
           'text-gray-500' : !link.url,
-          'font-bold': link.active
+          'font-bold bg-primary text-gray-200': link.active
         }"
         class="px-1"
     />
