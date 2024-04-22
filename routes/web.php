@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\CursosController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StudentController;
 use App\Models\Students;
-use http\Client\Request;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -77,9 +76,14 @@ Route::get('contatos', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/solicitacoes', function () {
+
+Route::get('/solicitacoes', function (Request $request) {
     return Inertia::render('Solicitações',[
-        'values' => Students::paginate(3),
+        'values' => Students::query()
+            ->when($request->input('search'), function ($query, $search) {
+                $query->where('nome', 'like', "%{$search}%");
+            })
+            ->paginate(3),
     ]);
 })->middleware(['auth', 'verified'])->name('solicitacoes');
 
