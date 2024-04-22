@@ -84,10 +84,13 @@ Route::get('/solicitacoes', function (Request $request) {
                 $query->where('nome', 'like', "%{$search}%");
             })
             ->paginate(3)
+            ->withQueryString()
             /**->through(fn($student) => [
                 //Aqui nós determinamos que campos da bd o props vai receber
             ])**/
         ,
+
+        'filters' => $request->only(['search'])
     ]);
 })->middleware(['auth', 'verified'])->name('solicitacoes');
 
