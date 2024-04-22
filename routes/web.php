@@ -55,7 +55,7 @@ Route::post('inscricoes/create', function () {
     ]);
     Students::create($attributes);
 
-    return Inertia::render('Inscrições.vue', [
+    return Inertia::render('Solicitações.vue', [
        'alert' => true,
     ]);
 });
@@ -77,11 +77,11 @@ Route::get('contatos', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/dashboard/inscricoes', function () {
-    return Inertia::render('Dash/Inscrições',[
+Route::get('/solicitacoes', function () {
+    return Inertia::render('Solicitações',[
         'values' => Students::paginate(3),
     ]);
-})->middleware(['auth', 'verified'])->name('dahsboard.inscricoes');
+})->middleware(['auth', 'verified'])->name('solicitacoes');
 
 
 Route::middleware('auth')->group(function () {
