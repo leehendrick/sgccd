@@ -28,7 +28,7 @@ import DashLink from "@/Components/DashLink.vue";
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'Inscrições', href: '/dashboard/inscricoes', icon: InboxArrowDownIcon, current: false },
+  { name: 'Solicitações', href: '/solicitacoes', icon: InboxArrowDownIcon, current: false },
   { name: 'Cursos', href: '#', icon: AcademicCapIcon, current: false },
   { name: 'Turmas', href: '#', icon: BuildingOfficeIcon, current: false },
   { name: 'Formadores', href: '#', icon: UsersIcon, current: false },
