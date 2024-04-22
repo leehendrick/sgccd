@@ -32,11 +32,9 @@ onMounted(() => {
         <div class="sm:flex sm:items-center">
           <div class="sm:flex-auto">
             <h1 class="text-base font-semibold leading-6 text-gray-900">Solicitações</h1>
-            <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title,
-              email and role.</p>
           </div>
           <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <input v-model="search" type="text" placeholder="Search..." class="focus:border-secondary focus:ring-secondary rounded-md shadow-sm">
+            <input v-model="search" type="text" placeholder="Search..." class="focus:border-secondary focus:ring-secondary rounded-md shadow-sm ">
           </div>
         </div>
         <div class="mt-8 flow-root">
@@ -58,10 +56,7 @@ onMounted(() => {
                 <tr v-for="person in values.data" :key="person.email">
                   <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                     <div class="flex items-center">
-                      <div class="h-11 w-11 flex-shrink-0">
-                        <img class="h-11 w-11 rounded-full" :src="person.image" alt="" />
-                      </div>
-                      <div class="ml-4">
+                      <div class="">
                         <div class="font-medium text-gray-900">{{ person.nome }}</div>
                         <div class="mt-1 text-gray-500">{{ person.email }}</div>
                       </div>
