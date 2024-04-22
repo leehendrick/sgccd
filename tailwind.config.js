@@ -18,7 +18,9 @@ export default {
             colors: {
                 primary: '#EAB841',
                 secondary: '#0C0F0F',
-                altern: '#B1B7BC'
+                altern: '#B1B7BC',
+                btnSee: '#FFC423',
+                btnSeeHover: '#eda900'
             }
         },
     },
