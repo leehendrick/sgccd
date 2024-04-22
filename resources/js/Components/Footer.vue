@@ -22,7 +22,7 @@ const footerNavigation = {
 
 <template>
   <!-- Footer -->
-  <div class="mx-auto  max-w-7xl px-6 lg:px-8 bg-secondary">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8 bg-secondary">
     <footer aria-labelledby="footer-heading" class="relative border-t border-gray-900/10 py-24 sm:mt-56 sm:py-32">
       <h2 id="footer-heading" class="sr-only">Footer</h2>
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
