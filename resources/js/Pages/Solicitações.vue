@@ -3,17 +3,21 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import {onMounted, ref, watch} from "vue";
 import Pagination from "@/Components/Pagination.vue";
 import {Inertia} from "@inertiajs/inertia";
+import TableButton from "@/Components/TableButton.vue";
 
-
-const search = ref('');
-
-defineProps({
+const props = defineProps({
   values: Object,
+  filters: Object
 })
+
+
+const search = ref(props.filters.search);
+
 
 watch(search, value => {
   Inertia.get('/solicitacoes', { search: value }, {
-    preserveState: true
+    preserveState: true,
+    replace: true,
   });
 })
 
@@ -31,7 +35,7 @@ onMounted(() => {
             <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title,
               email and role.</p>
           </div>
-          <input v-model="search" type="text" placeholder="Search...">
+          <input v-model="search" type="text" placeholder="Search..." class="focus:border-secondary focus:ring-secondary rounded-md shadow-sm">
           <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
             <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add user</button>
           </div>
@@ -42,10 +46,10 @@ onMounted(() => {
               <table class="min-w-full divide-y divide-gray-300">
                 <thead>
                 <tr>
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Title</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Nome</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Número de BI</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Instituição</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Role</th>
                   <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                     <span class="sr-only">Edit</span>
                   </th>
@@ -66,16 +70,17 @@ onMounted(() => {
                   </td>
                   <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                     <div class="text-gray-900">{{ person.bi }}</div>
-                    <div class="mt-1 text-gray-500">{{ person.instituicao }}</div>
                   </td>
+                  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                    <div class="mt-1 text-gray-500">{{ person.instituicao }}</div>
+                    </td>
                   <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                     <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>
                   </td>
-                  <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">{{ person.area_formacao }}</td>
-                  <td class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                    >Edit<span class="sr-only">, {{ person.nome }}</span></a
-                    >
+                  <td class="relative whitespace-nowrap px-5 py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                    <TableButton status="ver"/>
+                    <TableButton status="delete"/>
+                    <TableButton status="edit"/>
                   </td>
                 </tr>
                 </tbody>
