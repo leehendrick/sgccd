@@ -14,6 +14,7 @@ const props = defineProps({
 
 const display = ref(false);
 const search = ref(props.filters.search);
+const idSelected = ref('');
 
 watch(search, value => {
   router.get('/solicitacoes', { search: value }, {
@@ -22,16 +23,15 @@ watch(search, value => {
   });
 })
 
-const showMore = (value) => {
-  emit('click')
+const showMore = (value, id) => {
   display.value = value
+  idSelected.value = id
 }
 
 const close = (value) => {
   display.value = value
 }
 
-const emit = defineEmits(['click']);
 onMounted(() => {
 
 })
@@ -64,7 +64,7 @@ onMounted(() => {
                 </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
-                <tr v-for="person in values.data" :key="person.email">
+                <tr v-for="person in values.data" :id="person.id" :key="person.email">
                   <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                     <div class="flex items-center">
                       <div class="">
@@ -84,7 +84,7 @@ onMounted(() => {
                   </td>
                   <td class="relative whitespace-nowrap px-5 py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                     <div>
-                      <TableButton @click="showMore(true)" status="ver"/>
+                      <TableButton @click="showMore(true, person.id)" status="ver"/>
                       <TableButton status="delete"/>
                       <TableButton status="confirm"/>
                     </div>
@@ -105,7 +105,7 @@ onMounted(() => {
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-          About the selected row
+          Id selected : {{idSelected}}
         </p>
 
         <div class="mt-6 flex justify-end">
