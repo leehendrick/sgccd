@@ -2,7 +2,7 @@
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import {onMounted, ref, watch} from "vue";
 import Pagination from "@/Components/Pagination.vue";
-import {Inertia} from "@inertiajs/inertia";
+import {router} from "@inertiajs/vue3";
 import TableButton from "@/Components/TableButton.vue";
 
 const props = defineProps({
@@ -13,9 +13,8 @@ const props = defineProps({
 
 const search = ref(props.filters.search);
 
-
 watch(search, value => {
-  Inertia.get('/solicitacoes', { search: value }, {
+  router.get('/solicitacoes', { search: value }, {
     preserveState: true,
     replace: true,
   });
