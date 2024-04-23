@@ -4,13 +4,15 @@ import {onMounted, ref, watch} from "vue";
 import Pagination from "@/Components/Pagination.vue";
 import {router} from "@inertiajs/vue3";
 import TableButton from "@/Components/TableButton.vue";
+import Modal from '@/Components/Modal.vue';
+import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 const props = defineProps({
   values: Object,
   filters: Object
 })
 
-
+const display = ref(false);
 const search = ref(props.filters.search);
 
 watch(search, value => {
@@ -20,6 +22,16 @@ watch(search, value => {
   });
 })
 
+const showMore = (value) => {
+  emit('click')
+  display.value = value
+}
+
+const close = (value) => {
+  display.value = value
+}
+
+const emit = defineEmits(['click']);
 onMounted(() => {
 
 })
@@ -71,9 +83,11 @@ onMounted(() => {
                     <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>
                   </td>
                   <td class="relative whitespace-nowrap px-5 py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                    <TableButton status="ver"/>
-                    <TableButton status="delete"/>
-                    <TableButton status="confirm"/>
+                    <div>
+                      <TableButton @click="showMore(true)" status="ver"/>
+                      <TableButton status="delete"/>
+                      <TableButton status="confirm"/>
+                    </div>
                   </td>
                 </tr>
                 </tbody>
@@ -84,6 +98,21 @@ onMounted(() => {
       </div>
       <!-- Paginator -->
       <Pagination :links="values.links" class="mt-6"/>
+    <Modal :show="display" @close="">
+      <div class="p-6">
+        <h2 class="text-lg font-medium text-gray-900">
+          Display here some datas
+        </h2>
+
+        <p class="mt-1 text-sm text-gray-600">
+          About the selected row
+        </p>
+
+        <div class="mt-6 flex justify-end">
+          <SecondaryButton @click="close(false)"> Cancel </SecondaryButton>
+        </div>
+      </div>
+    </Modal>
   </admin-layout>
 </template>
 
