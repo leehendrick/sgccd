@@ -29,6 +29,12 @@
     </svg>
   </button>
 
+  <button v-if="status === 'confirm'" class="bg-green-600 hover:bg-green-700 p-2 ml-1 rounded-full text-white inline-flex items-center justify-center focus:border-secondary focus:ring-secondary">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+      <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
+    </svg>
+  </button>
+
 </template>
 
 <style scoped>
