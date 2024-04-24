@@ -1,6 +1,6 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import {onMounted, ref, watch} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import Pagination from "@/Components/Pagination.vue";
 import {router} from "@inertiajs/vue3";
 import TableButton from "@/Components/TableButton.vue";
@@ -26,12 +26,25 @@ watch(search, value => {
 const showMore = (value, id) => {
   display.value = value
   idSelected.value = id
+  setTimeout(() => {
+    console.log(itemEncontrado.value);
+  }, 3000);
 }
 
 const close = (value) => {
   display.value = value
 }
 
+const itemEncontrado = computed(() => {
+  alert('Called')
+  for (const chave in props.values.data) {
+    // Verificar se a chave é um ID e se corresponde ao ID procurado
+    if (props.values.data[chave].id === idSelected.value) {
+      return props.values.data[chave]
+    }
+  }
+  return null
+})
 onMounted(() => {
 
 })
