@@ -6,7 +6,6 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import Swal from "sweetalert2";
 
 const form = useForm({
   nome: '',
@@ -60,6 +59,21 @@ function getCurrentDate(){
 }
 
 
+const telefone = ref('');
+
+const telefoneRegex = /^[0-9]+$/;
+
+const validarTelefone = () => {
+  if (!telefoneRegex.test(telefone.value)) {
+    window.alert('Telefone inválido');
+    form.errors.telefone = 'Telefone inválido'
+    // Ou você pode definir uma mensagem de erro ou realizar outra ação
+  } else {
+    window.alert('Telefone válido');
+    // Faça algo quando o telefone for válido
+  }
+}
+
 /** Swal.fire({
     position: "top-end",
     icon: "success",
@@ -73,6 +87,8 @@ academic_level.value = props.academic_level;
 
 onMounted(() => {
   getCurrentDate()
+  telefone.value = prompt('Teste a regex');
+  validarTelefone()
 })
 
 </script>
