@@ -61,9 +61,9 @@ function getCurrentDate(){
 
 const telefone = ref('');
 
-const telefoneRegex = /^[0-9]+$/;
+const telefoneRegex = /9[9|1-5]\d{7}$/gm;
 
-const validarTelefone = () => {
+const validateInputs = () => {
   if (!telefoneRegex.test(telefone.value)) {
     window.alert('Telefone inválido');
     form.errors.telefone = 'Telefone inválido'
@@ -88,7 +88,7 @@ academic_level.value = props.academic_level;
 onMounted(() => {
   getCurrentDate()
   telefone.value = prompt('Teste a regex');
-  validarTelefone()
+  validateInputs()
 })
 
 </script>
