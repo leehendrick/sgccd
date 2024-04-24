@@ -117,13 +117,34 @@ onMounted(() => {
       <!-- Paginator -->
       <Pagination :links="values.links" class="mt-6"/>
         <Modal :show="display" @close="">
-          <div class="p-6">
+          <div class="p-6 ">
             <h2 class="text-lg font-medium text-gray-900">
-              Display here some datas
+              Dados do solicitante
             </h2>
-            <div>
+            <div class=" mt-2 text-xl bold border-t border-gray-900/10 ">
+              <p class="mt-2 text-sm text-gray-600">
+                <strong>Nome</strong>  : {{modalData.nome}}
+              </p>
+              <p class="mt-2 text-sm text-gray-600">
+                <strong>Email</strong> : {{modalData.email}}
+              </p>
+              <p class="mt-2 text-sm text-gray-600">
+                <strong>B.I</strong> : {{modalData.bi}}
+              </p>
+              <p class="mt-2 text-sm text-gray-600">
+                <strong>Data de Nascimento</strong> : {{modalData.data_nascimento}}
+              </p>
+              <p class="mt-2 text-sm text-gray-600">
+                <strong>Instituição</strong> : {{modalData.instituicao}}
+              </p>
               <p class="mt-1 text-sm text-gray-600">
-                Nome do Solicitante : {{modalData.nome}}
+                <strong>Área de Formação</strong> : {{modalData.area_formacao}}
+              </p>
+              <p class="mt-2 text-sm text-gray-600">
+                <strong>Telefone</strong> : {{modalData.telefone}}
+              </p>
+              <p class="mt-2 text-sm text-gray-600">
+                <strong>Data de Inscrição</strong> : {{modalData.data_inscricao}}
               </p>
             </div>
             <div class="mt-6 flex justify-end">
