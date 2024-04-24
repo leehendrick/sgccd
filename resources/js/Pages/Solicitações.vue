@@ -15,6 +15,7 @@ const props = defineProps({
 const display = ref(false);
 const search = ref(props.filters.search);
 const idSelected = ref('');
+const modalData = ref({});
 
 watch(search, value => {
   router.get('/solicitacoes', { search: value }, {
@@ -23,12 +24,17 @@ watch(search, value => {
   });
 })
 
+watch(idSelected, (newValue) => {
+  // Atualize modalData quando idSelected mudar
+  modalData.value = itemEncontrado.value
+  console.log(modalData.value)
+})
+
 const showMore = (value, id) => {
   display.value = value
   idSelected.value = id
-  setTimeout(() => {
-    console.log(itemEncontrado.value);
-  }, 3000);
+  modalData.value = itemEncontrado.value
+  console.log(modalData.value)
 }
 
 const close = (value) => {
@@ -36,7 +42,6 @@ const close = (value) => {
 }
 
 const itemEncontrado = computed(() => {
-  alert('Called')
   for (const chave in props.values.data) {
     // Verificar se a chave é um ID e se corresponde ao ID procurado
     if (props.values.data[chave].id === idSelected.value) {
@@ -111,21 +116,21 @@ onMounted(() => {
       </div>
       <!-- Paginator -->
       <Pagination :links="values.links" class="mt-6"/>
-    <Modal :show="display" @close="">
-      <div class="p-6">
-        <h2 class="text-lg font-medium text-gray-900">
-          Display here some datas
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-          Id selected : {{idSelected}}
-        </p>
-
-        <div class="mt-6 flex justify-end">
-          <SecondaryButton @click="close(false)"> Cancel </SecondaryButton>
-        </div>
-      </div>
-    </Modal>
+        <Modal :show="display" @close="">
+          <div class="p-6">
+            <h2 class="text-lg font-medium text-gray-900">
+              Display here some datas
+            </h2>
+            <div>
+              <p class="mt-1 text-sm text-gray-600">
+                Nome do Solicitante : {{modalData.nome}}
+              </p>
+            </div>
+            <div class="mt-6 flex justify-end">
+              <SecondaryButton @click="close(false)"> Cancel </SecondaryButton>
+            </div>
+          </div>
+        </Modal>
   </admin-layout>
 </template>
 
