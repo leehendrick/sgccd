@@ -40,15 +40,15 @@ Route::get('inscricoes', function () {
 
 Route::post('inscricoes/create', function () {
     $attributes = request()->validate([
-        'nome' => 'required',
-        'email' => 'required | email',
-        'bi' => 'required',
-        'data_nascimento' => 'required',
-        'instituicao' => 'required',
-        'area_formacao' => 'required',
-        'data_inscricao' => 'required',
-        'genero' => 'required',
-        'telefone' => 'required',
+        'nome' => 'required | string |',
+        'email' => 'required | string | email',
+        'bi' => 'required | string | size:14',
+        'data_nascimento' => 'required | string',
+        'instituicao' => 'required | string',
+        'area_formacao' => 'required | string',
+        'data_inscricao' => 'required | string',
+        'genero' => 'required | size:1 | regex:/^[a-zA-Z]$/',
+        'telefone' => 'required | regex:/^([0-9\s\-\+\(\)]*)$/',
         'curso_id' => 'required',
         'nivel_academico_id' => 'required',
     ]);
