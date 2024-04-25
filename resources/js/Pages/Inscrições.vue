@@ -1,7 +1,7 @@
 <script setup>
 import {Head, useForm, usePage} from "@inertiajs/vue3";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
@@ -60,17 +60,30 @@ function getCurrentDate(){
 
 
 
-const telefoneRegex = /9[9|1-5]\d{7}$/gm;
-const nomeRegex = /^[a-zA-Z\s]+$/
-const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
-const biRegex = /^\d{9}[A-Z]{2}\d{3}$/
-const datasRegex = /^\d{4}-\d{2}-\d{2}$/
-const generoRegex = /^[MF]$/
-const idRegex = /^\d+$/
+
 
 const validateInputs = () => {
-  if (!telefoneRegex.test(form.telefone.value)) {
-    form.errors.telefone = 'Telefone inválido'
+
+  const telefoneRegex = /9[9|1-5]\d{7}$/gm;
+  const nomeRegex = /^[a-zA-Z\s]+$/
+  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
+  const biRegex = /^\d{9}[A-Z]{2}\d{3}$/
+  const datasRegex = /^\d{4}-\d{2}-\d{2}$/
+  const generoRegex = /^[MF]$/
+  const idRegex = /^\d+$/
+
+  form.errors = {
+    telefone: telefoneRegex.test(form.telefone) ? '' : 'Número de telefone inválido',
+    nome: nomeRegex.test(form.nome) ? '' : 'Nome inválido',
+    bi: biRegex.test(form.bi) ? '' : 'Número de bi inválido',
+    curso_id: idRegex.test(form.curso_id) ? '' : 'Curso inválido',
+    nivel_academico_id: idRegex.test(form.nivel_academico_id) ? '' : 'Nível Acadêmico inválido',
+    data_inscricao: datasRegex.test(form.data_inscricao) ? '' : 'Data de inscrição inválido',
+    genero: generoRegex.test(form.genero) ? '' : 'Genéro inválido',
+    data_nascimento: datasRegex.test(form.data_nascimento) ? '' : 'Data de nascimento inválido',
+    area_formacao: nomeRegex.test(form.area_formacao) ? '' : 'Área de formação inválido',
+    instituicao: nomeRegex.test(form.instituicao) ? '' : 'Instituição inválido',
+    email: emailRegex.test(form.email) ? '' : 'Email inválido'
   }
 }
 
@@ -212,7 +225,7 @@ onMounted(() => {
                 <div class="mt-4">
                   <InputLabel for="telefone" value="Telefone" />
 
-                  <input @keypress="validateInputs" id="telefone" v-model="form.telefone" required type="number" class="mt-1 block w-full border-secondary focus:border-secondary focus:ring-secondary rounded-md shadow-sm"/>
+                  <input @input="validateInputs" id="telefone" v-model="form.telefone" required type="number" class="mt-1 block w-full border-secondary focus:border-secondary focus:ring-secondary rounded-md shadow-sm"/>
 
                   <InputError class="mt-2" :message="form.errors.telefone" />
                 </div>
