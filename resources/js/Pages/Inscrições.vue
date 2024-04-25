@@ -31,8 +31,8 @@ const { props } = usePage();
 const alert = props.alert;
 
 const submit = () => {
-  if (form.curso_id === 0 || form.nivel_academico_id === 0){
-    alert('Selecione o curso e o Nível Acadêmico')
+  if (form.errors){
+    alert('A validação falhou em um dos campos')
   }else {
     form.post('inscricoes/create', form);
   }
@@ -58,34 +58,51 @@ function getCurrentDate(){
   console.log(form.data_inscricao)
 }
 
+const nomeRegex = /^[a-zA-Z\s]{5,}$/
+const datasRegex = /^\d{4}-\d{2}-\d{2}$/
+const idRegex = /^\d+$/
 
-
-
-
-const validateInputs = () => {
-
-  const telefoneRegex = /9[9|1-5]\d{7}$/gm;
-  const nomeRegex = /^[a-zA-Z\s]+$/
-  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
-  const biRegex = /^\d{9}[A-Z]{2}\d{3}$/
-  const datasRegex = /^\d{4}-\d{2}-\d{2}$/
-  const generoRegex = /^[MF]$/
-  const idRegex = /^\d+$/
-
-  form.errors = {
-    telefone: telefoneRegex.test(form.telefone) ? '' : 'Número de telefone inválido',
-    nome: nomeRegex.test(form.nome) ? '' : 'Nome inválido',
-    bi: biRegex.test(form.bi) ? '' : 'Número de bi inválido',
-    curso_id: idRegex.test(form.curso_id) ? '' : 'Curso inválido',
-    nivel_academico_id: idRegex.test(form.nivel_academico_id) ? '' : 'Nível Acadêmico inválido',
-    data_inscricao: datasRegex.test(form.data_inscricao) ? '' : 'Data de inscrição inválido',
-    genero: generoRegex.test(form.genero) ? '' : 'Genéro inválido',
-    data_nascimento: datasRegex.test(form.data_nascimento) ? '' : 'Data de nascimento inválido',
-    area_formacao: nomeRegex.test(form.area_formacao) ? '' : 'Área de formação inválido',
-    instituicao: nomeRegex.test(form.instituicao) ? '' : 'Instituição inválido',
-    email: emailRegex.test(form.email) ? '' : 'Email inválido'
-  }
+const validateNome = () => {
+  form.errors.nome = nomeRegex.test(form.nome) ? '' : 'Nome inválido'
 }
+const validateTelefone = () => {
+  const telefoneRegex = /9[9|1-5]\d{7}$/gm;
+  form.errors.telefone = telefoneRegex.test(form.telefone) ? '' : 'Telefone inválido'
+}
+const validateBi = () => {
+  const biRegex = /^\d{9}[A-Z]{2}\d{3}$/
+  form.errors.bi = biRegex.test(form.bi) ? '' : 'BI inválido'
+}
+const validateEmail = () => {
+  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
+  form.errors.email = emailRegex.test(form.email) ? '' : 'Email inválido'
+}
+const validateDataNasc = () => {
+  form.errors.data_nascimento = datasRegex.test(form.data_nascimento) ? '' : 'Data de nascimento inválido'
+}
+const validateInstituicao = () => {
+  form.errors.instituicao = nomeRegex.test(form.instituicao) ? '' : 'Instituição inválido'
+}
+const validateAreaForma = () => {
+  form.errors.area_formacao = nomeRegex.test(form.area_formacao) ? '' : 'Area de formação inválido'
+}
+const validateDataInsc = () => {
+  form.errors.data_inscricao = datasRegex.test(form.data_inscricao) ? '' : 'Data de inscrição inválido'
+}
+const validateGenero = () => {
+  const generoRegex = /^[MF]$/
+  form.errors.genero = generoRegex.test(form.genero) ? '' : 'Género inválido'
+}
+const validateCurso = () => {
+  form.errors.curso_id = idRegex.test(form.curso_id) ? '' : 'Género inválido'
+}
+const validateNivelAcadem = () => {
+  form.errors.nivel_academico_id = idRegex.test(form.nivel_academico_id) ? '' : 'Nível acadêmico inválido'
+}
+
+
+
+
 
 /** Swal.fire({
     position: "top-end",
@@ -142,9 +159,10 @@ onMounted(() => {
                       class="mt-1 block w-full"
                       v-model="form.nome"
                       required
+                      @input="validateNome"
                   />
 
-                  <InputError class="mt-2" :message="form.errors.name" />
+                  <InputError class="mt-2" :message="form.errors.nome" />
                 </div>
 
                 <div class="mt-4">
@@ -157,6 +175,7 @@ onMounted(() => {
                       v-model="form.email"
                       required
                       autocomplete="current-password"
+                      @input="validateEmail"
                   />
 
                   <InputError class="mt-2" :message="form.errors.email" />
@@ -172,6 +191,7 @@ onMounted(() => {
                       v-model="form.bi"
                       required
                       autocomplete="current-password"
+                      @input="validateBi"
                   />
 
                   <InputError class="mt-2" :message="form.errors.bi" />
@@ -187,6 +207,7 @@ onMounted(() => {
                       v-model="form.data_nascimento"
                       required
                       autocomplete="current-password"
+                      @input="validateDataNasc"
                   />
 
                   <InputError class="mt-2" :message="form.errors.data_nascimento" />
@@ -202,6 +223,7 @@ onMounted(() => {
                       v-model="form.instituicao"
                       required
                       autocomplete="current-password"
+                      @input="validateInstituicao"
                   />
 
                   <InputError class="mt-2" :message="form.errors.instituicao" />
@@ -217,6 +239,7 @@ onMounted(() => {
                       v-model="form.area_formacao"
                       required
                       autocomplete="current-password"
+                      @input="validateAreaForma"
                   />
 
                   <InputError class="mt-2" :message="form.errors.area_formacao" />
@@ -225,7 +248,7 @@ onMounted(() => {
                 <div class="mt-4">
                   <InputLabel for="telefone" value="Telefone" />
 
-                  <input @input="validateInputs" id="telefone" v-model="form.telefone" required type="number" class="mt-1 block w-full border-secondary focus:border-secondary focus:ring-secondary rounded-md shadow-sm"/>
+                  <input @input="validateTelefone" id="telefone" v-model="form.telefone" required type="number" class="mt-1 block w-full border-secondary focus:border-secondary focus:ring-secondary rounded-md shadow-sm"/>
 
                   <InputError class="mt-2" :message="form.errors.telefone" />
                 </div>
