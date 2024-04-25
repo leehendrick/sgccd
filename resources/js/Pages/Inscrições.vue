@@ -16,9 +16,9 @@ const form = useForm({
   area_formacao: '',
   data_inscricao: '',
   genero: '',
-  telefone: 0,
-  curso_id: 0,
-  nivel_academico_id: 0,
+  telefone: null,
+  curso_id: null,
+  nivel_academico_id: null,
 });
 const selectedOption = ref('Individual')
 const academicLevel = ref('')
@@ -59,18 +59,18 @@ function getCurrentDate(){
 }
 
 
-const telefone = ref('');
 
 const telefoneRegex = /9[9|1-5]\d{7}$/gm;
+const nomeRegex = /^[a-zA-Z\s]+$/
+const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
+const biRegex = /^\d{9}[A-Z]{2}\d{3}$/
+const datasRegex = /^\d{4}-\d{2}-\d{2}$/
+const generoRegex = /^[MF]$/
+const idRegex = /^\d+$/
 
 const validateInputs = () => {
-  if (!telefoneRegex.test(telefone.value)) {
-    window.alert('Telefone inválido');
+  if (!telefoneRegex.test(form.telefone.value)) {
     form.errors.telefone = 'Telefone inválido'
-    // Ou você pode definir uma mensagem de erro ou realizar outra ação
-  } else {
-    window.alert('Telefone válido');
-    // Faça algo quando o telefone for válido
   }
 }
 
@@ -87,8 +87,6 @@ academic_level.value = props.academic_level;
 
 onMounted(() => {
   getCurrentDate()
-  telefone.value = prompt('Teste a regex');
-  validateInputs()
 })
 
 </script>
@@ -214,7 +212,7 @@ onMounted(() => {
                 <div class="mt-4">
                   <InputLabel for="telefone" value="Telefone" />
 
-                  <input id="telefone" v-model="form.telefone" required type="number" class="mt-1 block w-full border-secondary focus:border-secondary focus:ring-secondary rounded-md shadow-sm"/>
+                  <input @keypress="validateInputs" id="telefone" v-model="form.telefone" required type="number" class="mt-1 block w-full border-secondary focus:border-secondary focus:ring-secondary rounded-md shadow-sm"/>
 
                   <InputError class="mt-2" :message="form.errors.telefone" />
                 </div>
