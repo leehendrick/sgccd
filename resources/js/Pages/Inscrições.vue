@@ -1,7 +1,7 @@
 <script setup>
 import {Head, useForm, usePage} from "@inertiajs/vue3";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
-import {onMounted, ref, watch} from "vue";
+import {onMounted, ref,} from "vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
