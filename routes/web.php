@@ -47,8 +47,8 @@ Route::post('inscricoes/create', function () {
         'instituicao' => 'required | string',
         'area_formacao' => 'required | string',
         'data_inscricao' => 'required | string',
-        'genero' => 'required | size:1 | regex:/^[a-zA-Z]$/',
-        'telefone' => 'required | regex:/^([0-9\s\-\+\(\)]*)$/',
+        'genero' => 'required | size:1 ',
+        'telefone' => 'required',
         'curso_id' => 'required',
         'nivel_academico_id' => 'required',
     ]);
