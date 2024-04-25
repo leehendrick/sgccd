@@ -254,7 +254,7 @@ onMounted(() => {
                 </div>
 
                 <div class="my-5">
-                  <InputLabel for="academicLevel" value="Selecione o nível acadêmico" />
+                  <InputLabel @input="validateNivelAcadem" for="academicLevel" value="Selecione o nível acadêmico" />
                   <select
                           v-model="academicLevel"
                           @change="form.nivel_academico_id = academicLevel"
@@ -265,7 +265,7 @@ onMounted(() => {
                   </select>
                 </div>
                 <div class="my-5">
-                  <InputLabel for="academicLevel" value="Selecione o gênero" />
+                  <InputLabel @input="validateGenero" for="academicLevel" value="Selecione o gênero" />
                   <select
                           v-model="genero"
                           @change="form.genero = genero"
