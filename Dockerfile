@@ -9,13 +9,19 @@ RUN apt-get update &&   \
     git                 \
     zip                 \
     unzip               \
-    && docker-php-ext-install pdo pdo_mysql
+    && docker-php-ext-install pdo pdo_mysql \
+    && libcurl4-openssl-dev pkg-config libssl-dev \
+
+
+RUN docker-php-ext-install http
+
 
 # Instale o composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 #Copie o códido do projeto para o contâiner
 COPY . .
+
 
 # Instale as dependências do Composer
 RUN composer install
