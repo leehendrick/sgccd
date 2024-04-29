@@ -19,9 +19,6 @@ WORKDIR /var/www/html
 # Copiar o código do projeto para o contêiner
 COPY . .
 
-# Instalar as dependências do Composer
-RUN composer install
-
 # Expor a porta 8000 (ou a porta que você configurar para o servidor PHP)
 EXPOSE 8000
 
