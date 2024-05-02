@@ -53,10 +53,6 @@ Route::post('inscricoes/create', function () {
         'nivel_academico_id' => 'required',
     ]);
     Students::create($attributes);
-
-    return Inertia::render('Solicitações.vue', [
-       'alert' => true,
-    ]);
 });
 
 Route::get('inscricoes/{cursoId}', function ($id) {
@@ -101,5 +97,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/cursos', function () {
+   return Inertia::render('Cursos');
+});
 
 require __DIR__.'/auth.php';
