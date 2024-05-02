@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CursosController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Courses;
 use App\Models\Students;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
@@ -97,8 +98,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/cursos', function () {
-   return Inertia::render('Cursos');
+Route::get('/cursos', function (Request $request) {
+    return Inertia::render('Cursos',[
+        'values' => Courses::query()
+            ->when($request->input('search'), function ($query, $search) {
+                $query->where('nome', 'like', "%{$search}%");
+            })
+            ->paginate(3)
+            ->withQueryString()
+        /**->through(fn($student) => [
+        //Aqui nós determinamos que campos da bd o props vai receber
+        ])**/
+        ,
+
+        'filters' => $request->only(['search'])
+    ]);
 });
 
 require __DIR__.'/auth.php';
