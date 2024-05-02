@@ -6,6 +6,7 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import Swal from "sweetalert2";
 
 const form = useForm({
   nome: '',
@@ -31,11 +32,18 @@ const { props } = usePage();
 const alert = props.alert;
 
 const submit = () => {
-  if (form.errors){
-    alert('A validação falhou em um dos campos')
-  }else {
+    if (form.errors){
+      form.processing = true;
+      Swal.fire({
+        icon: "error",
+        title: "Houve um erro",
+        text: "Verifique as informações digitadas",
+        showConfirmButton: false,
+        timerProgressBar: true,
+        timer: 2000,
+      })
+    }
     form.post('inscricoes/create', form);
-  }
 }
 
 async function getCurso(id){
@@ -138,7 +146,6 @@ onMounted(() => {
               <select @change="getCurso(cursoSelect); form.curso_id = cursoSelect; console.log(form.curso_id)"
                       v-model="cursoSelect"
                       class="border rounded border-secondary focus:border-secondary focus:ring-secondary">
-                <option value>Selecione o curso</option>
                 <option v-for="fill in fills" :key="fill.id" :value="fill.id">{{ fill.nome }}</option>
               </select>
             </div>
@@ -301,11 +308,11 @@ onMounted(() => {
 
           <div class="">
             <div class="text-center p-4 cursor-pointer transition-transform ease-in-out transform hover:scale-105">
-              <div  v-for="cursoData in cursosData" class="card bg-white hover:bg-primary hover:text-white rounded-lg shadow-md p-6">
-                <h3 class="text-lg font-bold mb-2">{{cursoData.nome}}</h3>
+              <div  v-for="cursoData in cursosData" class="card bg-primary text-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-extrabold mb-2">{{cursoData.nome}}</h3>
                 <p class="text-sm">{{ cursoData.descricao }}</p>
-                <p class="mt-4  text-sm">{{ cursoData.duracao }}</p>
-                <p class="mt-4  text-sm">{{ cursoData.preco}}</p>
+                <p class="mt-2  text-sm">{{ cursoData.duracao }}</p>
+                <p class="mt-2  text-sm">{{ cursoData.preco}}</p>
               </div>
             </div>
           </div>
