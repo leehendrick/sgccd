@@ -38,12 +38,6 @@
     transform: translateY(0); /* Deslocamento final */
 }
 
-.card:hover{
-    .my-btn{
-        color: #EAB841;
-        background-color: white;
-    }
-}
 
 
 
