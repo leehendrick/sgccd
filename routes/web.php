@@ -41,8 +41,8 @@ Route::get('inscricoes', function () {
 Route::post('inscricoes/create', function () {
     $attributes = request()->validate([
         'nome' => 'required | string |',
-        'email' => 'required | string | email',
-        'bi' => 'required | string | size:14',
+        'email' => 'required | string | email | unique',
+        'bi' => 'required | string | size:14 | unique',
         'data_nascimento' => 'required | string',
         'instituicao' => 'required | string',
         'area_formacao' => 'required | string',
