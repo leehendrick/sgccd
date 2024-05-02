@@ -22,8 +22,8 @@ const footerNavigation = {
 
 <template>
   <!-- Footer -->
-  <div class="mx-auto max-w-7xl px-6 lg:px-8 bg-secondary">
-    <footer aria-labelledby="footer-heading" class="relative border-t border-gray-900/10 py-24 sm:mt-56 sm:py-32">
+    <footer aria-labelledby="footer-heading" class="relative bg-secondary border-t border-gray-900/10 py-24 sm:mt-56 sm:py-32">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <h2 id="footer-heading" class="sr-only">Footer</h2>
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <img class="h-7" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Company name" />
@@ -67,8 +67,9 @@ const footerNavigation = {
           </div>
         </div>
       </div>
+      </div>
     </footer>
-  </div>
+
 </template>
 
 <style scoped>
