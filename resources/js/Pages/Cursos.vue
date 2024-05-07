@@ -55,6 +55,9 @@ const showMore = (value, id) => {
             <h1 class="text-base font-semibold leading-6 text-gray-900">Cursos</h1>
           </div>
           <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+            <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add curso</button>
+          </div>
+          <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
             <input v-model="search" type="text" placeholder="Search..." class="focus:border-secondary focus:ring-secondary rounded-md shadow-sm ">
           </div>
         </div>
@@ -96,7 +99,7 @@ const showMore = (value, id) => {
                     <div>
                       <TableButton @click="" status="ver"/>
                       <TableButton status="delete"/>
-                      <TableButton status="confirm"/>
+                      <TableButton status="edit"/>
                     </div>
                   </td>
                 </tr>
