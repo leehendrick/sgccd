@@ -1,14 +1,10 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import {
     ArrowDownCircleIcon,
     ArrowPathIcon,
     ArrowUpCircleIcon,
-    Bars3Icon,
-    EllipsisHorizontalIcon,
-    PlusSmallIcon,
 } from "@heroicons/vue/20/solid";
 
 const secondaryNavigation = [
