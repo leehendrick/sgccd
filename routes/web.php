@@ -80,7 +80,7 @@ Route::get('/solicitacoes', function (Request $request) {
             ->when($request->input('search'), function ($query, $search) {
                 $query->where('nome', 'like', "%{$search}%");
             })
-            ->paginate(3)
+            ->paginate(6)
             ->withQueryString()
             /**->through(fn($student) => [
                 //Aqui nós determinamos que campos da bd o props vai receber
