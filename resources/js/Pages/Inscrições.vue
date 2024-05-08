@@ -77,7 +77,7 @@ function getCurrentDate() {
     console.log(form.data_inscricao);
 }
 
-const nomeRegex = /^[a-zA-Z\s]{5,}$/;
+const nomeRegex = /^[A-Za-zÀ-ú\s]{5,}$/;
 const datasRegex = /^\d{4}-\d{2}-\d{2}$/;
 const idRegex = /^\d+$/;
 
