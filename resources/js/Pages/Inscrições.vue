@@ -29,19 +29,24 @@ const fills = ref([]);
 const academic_level = ref([]);
 const genero = ref([]);
 const { props } = usePage();
-const alert = props.alert;
 
 const submit = () => {
+    form.post("inscricoes/create", form);
     if (form.errors) {
-        form.processing = true;
         Swal.fire({
             icon: "error",
             title: "Houve um erro",
-            text: "Verifique as informações digitadas",
+            text: "Verifique os dados digitados",
+            showConfirmButton: true,
+        });
+    } else {
+        Swal.fire({
+            icon: "success",
+            title: "Solicitação enviada",
+            text: "Sua solicitação foi processada e enviada com sucesso",
             showConfirmButton: true,
         });
     }
-    form.post("inscricoes/create", form);
 };
 
 async function getCurso(id) {
