@@ -160,7 +160,7 @@ const clients = [
                                 :href="item.href"
                                 :class="
                                     item.current
-                                        ? 'text-indigo-600'
+                                        ? 'text-primary'
                                         : 'text-gray-700'
                                 "
                                 >{{ item.name }}</a
@@ -371,7 +371,7 @@ const clients = [
                                                             :href="
                                                                 transaction.href
                                                             "
-                                                            class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500"
+                                                            class="text-sm font-medium leading-6 text-primary"
                                                             >View<span
                                                                 class="hidden sm:inline"
                                                             >
