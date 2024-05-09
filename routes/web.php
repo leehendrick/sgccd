@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CursosController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
 use App\Models\Courses;
 use App\Models\Students;
 use Illuminate\Http\Request;
@@ -74,23 +75,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/solicitacoes', function (Request $request) {
-    return Inertia::render('Solicitações',[
-        'values' => Students::query()
-            ->when($request->input('search'), function ($query, $search) {
-                $query->where('nome', 'like', "%{$search}%");
-            })
-            ->orderByDesc('created_at', 'desc')
-            ->paginate(6)
-            ->withQueryString()
-            /**->through(fn($student) => [
-                //Aqui nós determinamos que campos da bd o props vai receber
-            ])**/
-        ,
-
-        'filters' => $request->only(['search'])
-    ]);
-})->middleware(['auth', 'verified'])->name('solicitacoes');
+Route::get('/solicitacoes', [
+    StudentController::class, 'solicitacoes'
+])->middleware(['auth', 'verified'])->name('solicitacoes');
 
 
 Route::middleware('auth')->group(function () {
@@ -99,21 +86,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/cursos', function (Request $request) {
-    return Inertia::render('Cursos',[
-        'values' => Courses::query()
-            ->when($request->input('search'), function ($query, $search) {
-                $query->where('nome', 'like', "%{$search}%");
-            })
-            ->paginate(3)
-            ->withQueryString()
-        /**->through(fn($student) => [
-        //Aqui nós determinamos que campos da bd o props vai receber
-        ])**/
-        ,
-
-        'filters' => $request->only(['search'])
-    ]);
-});
+Route::get('/cursos', [
+    CursosController::class, 'courses'
+])->middleware(['auth', 'verified'])->name('cursos');
 
 require __DIR__.'/auth.php';
