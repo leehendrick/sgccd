@@ -6,6 +6,7 @@ import { router } from "@inertiajs/vue3";
 import TableButton from "@/Components/TableButton.vue";
 import Modal from "@/Components/Modal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import TextInput from "@/Components/TextInput.vue";
 
 const props = defineProps({
     values: Object,
@@ -13,6 +14,7 @@ const props = defineProps({
 });
 
 const display = ref(false);
+const confirm = ref(false);
 const search = ref(props.filters.search);
 const idSelected = ref("");
 const modalData = ref({});
@@ -41,8 +43,12 @@ const showMore = (value, id) => {
     console.log(modalData.value);
 };
 
-const close = (value) => {
-    display.value = value;
+const subscribe = (value, id) => {
+    confirm.value = value;
+};
+
+const close = () => {
+    display.value = false;
 };
 
 const itemEncontrado = computed(() => {
@@ -170,7 +176,12 @@ onMounted(() => {});
                                                 status="ver"
                                             />
                                             <TableButton status="delete" />
-                                            <TableButton status="confirm" />
+                                            <TableButton
+                                                status="confirm"
+                                                @click="
+                                                    subscribe(true, person.id)
+                                                "
+                                            />
                                         </div>
                                     </td>
                                 </tr>
@@ -182,7 +193,7 @@ onMounted(() => {});
         </div>
         <!-- Paginator -->
         <Pagination :links="values.links" class="mt-6" />
-        <Modal :show="display" @close="">
+        <Modal :show="display">
             <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">
                     Dados do solicitante
@@ -234,7 +245,28 @@ onMounted(() => {});
                     </p>
                 </div>
                 <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="close(false)">
+                    <SecondaryButton @click="close"> Cancel </SecondaryButton>
+                </div>
+            </div>
+        </Modal>
+        <Modal :show="confirm">
+            <div class="p-6">
+                <h2 class="text-lg font-medium text-gray-900">
+                    Inscrever formando
+                </h2>
+                <div class="mt-5">
+                    <h3>Escolha a turma</h3>
+                    <select
+                        class="my-5 mt-0 border rounded border-secondary focus:border-secondary focus:ring-secondary"
+                    >
+                        <option>TurmaB71</option>
+                    </select>
+                </div>
+                <div class="flex justify-end">
+                    <SecondaryButton class="mx-2 bg-green-700">
+                        Inscrever
+                    </SecondaryButton>
+                    <SecondaryButton @click="subscribe(false)">
                         Cancel
                     </SecondaryButton>
                 </div>
