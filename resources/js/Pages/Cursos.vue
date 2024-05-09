@@ -29,8 +29,8 @@ watch(search, (value) => {
     );
 });
 
-const close = (value) => {
-    display.value = value;
+const close = () => {
+    display.value = false;
 };
 
 const itemEncontrado = computed(() => {
@@ -162,7 +162,9 @@ const showMore = (value, id) => {
                                     >
                                         <div>
                                             <TableButton
-                                                @click=""
+                                                @click="
+                                                    showMore(true, curso.id)
+                                                "
                                                 status="ver"
                                             />
                                             <TableButton status="delete" />
@@ -178,45 +180,49 @@ const showMore = (value, id) => {
         </div>
         <!-- Paginator -->
         <Pagination :links="values.links" class="mt-6" />
-        <Modal :show="display" @close="">
+        <Modal :show="display">
             <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">
-                    Dados do solicitante
+                    Dados do Curso
                 </h2>
                 <div class="mt-2 text-xl bold border-t border-gray-900/10">
-                    <p class="mt-2 text-sm text-gray-600">
-                        <strong>Nome</strong> : {{ modalData.nome }}
+                    <p class="mt-2 text-sm text-gray-900">
+                        <strong>Nome : </strong>
+                        {{ modalData.nome }}
                     </p>
-                    <p class="mt-2 text-sm text-gray-600">
-                        <strong>Email</strong> : {{ modalData.email }}
+                    <p
+                        class="mt-2 text-sm pt-2 text-gray-900 border-t border-gray-900/10"
+                    >
+                        <strong>Data de Inicio :</strong>
+                        {{ modalData.data_inicio }}
                     </p>
-                    <p class="mt-2 text-sm text-gray-600">
-                        <strong>B.I</strong> : {{ modalData.bi }}
+                    <p
+                        class="mt-2 text-sm pt-2 text-gray-900 border-t border-gray-900/10"
+                    >
+                        <strong>Data de Término :</strong>
+                        {{ modalData.data_termino }}
                     </p>
-                    <p class="mt-2 text-sm text-gray-600">
-                        <strong>Data de Nascimento</strong> :
-                        {{ modalData.data_nascimento }}
+                    <p
+                        class="mt-2 text-sm pt-2 text-gray-900 border-t border-gray-900/10"
+                    >
+                        <strong>Vagas :</strong>
+                        {{ modalData.vagas }}
                     </p>
-                    <p class="mt-2 text-sm text-gray-600">
-                        <strong>Instituição</strong> :
-                        {{ modalData.instituicao }}
+                    <p
+                        class="mt-2 text-sm pt-2 text-gray-900 border-t border-gray-900/10"
+                    >
+                        <strong>Status :</strong>
+                        {{ modalData.status }}
                     </p>
-                    <p class="mt-1 text-sm text-gray-600">
-                        <strong>Área de Formação</strong> :
-                        {{ modalData.area_formacao }}
-                    </p>
-                    <p class="mt-2 text-sm text-gray-600">
-                        <strong>Telefone</strong> : {{ modalData.telefone }}
-                    </p>
-                    <p class="mt-2 text-sm text-gray-600">
-                        <strong>Data de Inscrição</strong> :
-                        {{ modalData.data_inscricao }}
+                    <p
+                        class="mt-1 text-sm pt-2 text-gray-900 border-t border-gray-900/10"
+                    >
+                        <strong>Duração :</strong>
+                        {{ modalData.duracao }}
                     </p>
                 </div>
                 <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="close(false)">
-                        Cancel
-                    </SecondaryButton>
+                    <SecondaryButton @click="close"> Cancel </SecondaryButton>
                 </div>
             </div>
         </Modal>
