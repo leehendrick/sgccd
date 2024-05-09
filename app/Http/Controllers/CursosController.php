@@ -16,7 +16,7 @@ class CursosController extends Controller
                 ->when($request->input('search'), function ($query, $search) {
                     $query->where('nome', 'like', "%{$search}%");
                 })
-                ->paginate(3)
+                ->paginate(5)
                 ->withQueryString()
             /**->through(fn($student) => [
             //Aqui nós determinamos que campos da bd o props vai receber
