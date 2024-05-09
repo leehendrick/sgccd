@@ -80,6 +80,7 @@ Route::get('/solicitacoes', function (Request $request) {
             ->when($request->input('search'), function ($query, $search) {
                 $query->where('nome', 'like', "%{$search}%");
             })
+            ->orderByDesc('created_at', 'desc')
             ->paginate(6)
             ->withQueryString()
             /**->through(fn($student) => [
