@@ -130,6 +130,15 @@ const validateNivelAcadem = () => {
         ? ""
         : "Nível acadêmico inválido";
 };
+const validateDataNascimento = () => {
+    const birthDate = new Date(form.data_nascimento);
+    const today = new Date();
+    if (birthDate >= today) {
+        form.errors.data_nascimento = "Data de nascimento inválido ?";
+    } else {
+        form.errors.data_nascimento = "";
+    }
+};
 
 /** Swal.fire({
     position: "top-end",
@@ -262,7 +271,7 @@ onMounted(() => {
                                     v-model="form.data_nascimento"
                                     required
                                     autocomplete="current-password"
-                                    @input="validateDataNasc"
+                                    @input="validateDataNascimento"
                                 />
 
                                 <InputError
