@@ -4,10 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\AcademicLevel;
 use App\Models\Courses;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CursosController extends Controller
 {
-    //
+    public static function courses(Request $request): \Inertia\Response
+    {
+        return Inertia::render('Cursos',[
+            'values' => Courses::query()
+                ->when($request->input('search'), function ($query, $search) {
+                    $query->where('nome', 'like', "%{$search}%");
+                })
+                ->paginate(3)
+                ->withQueryString()
+            /**->through(fn($student) => [
+            //Aqui nós determinamos que campos da bd o props vai receber
+            ])**/
+            ,
+
+            'filters' => $request->only(['search'])
+        ]);
+    }
+
     public static function index()
     {
         return Courses::where('status', '=', 'aberto')->get();
