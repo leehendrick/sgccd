@@ -44,6 +44,24 @@ class CursosController extends Controller
 
     }
 
+    public static function create(Request $request)
+    {
+        $request->validate([
+            'nome' => 'required',
+            'descricao' => 'required|string',
+            'duracao' => 'required|string',
+            'preco' => 'required',
+            'data_inicio' => 'required',
+            'data_termino' => 'required',
+            'local' => 'required|string',
+            'vagas' => 'required|integer|min:10|max:50',
+            'requisitos' => 'required',
+            'status' => 'required|string',
+            'categories_id' => 'required|integer',
+
+        ]);
+    }
+
     public static function getAllAcademicLevel()
     {
         return AcademicLevel::all();
