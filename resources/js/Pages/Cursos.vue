@@ -40,6 +40,50 @@ const categoriaSelected = ref("");
 
 categories.value = props.categorie;
 
+const nomeRegex = /^[A-Za-zÀ-ú\s]{5,}$/;
+const idRegex = /^\d+$/;
+const precoRegex = /[1-9]\d*(?:\.\d{1,2})?|0\.\d{1,2}/;
+const validateDataInicio = () => {
+    const dataInicio = new Date(form.data_inicio);
+    const dataTermino = new Date(form.data_termino);
+    const today = new Date();
+    if (dataInicio <= today) {
+        form.errors.data_inicio = "Data inválida";
+    } else {
+        form.errors.data_inicio = "";
+    }
+};
+const validateDataTermino = () => {
+    const dataTermino = new Date(form.data_termino);
+    const today = new Date();
+    if (dataTermino <= today) {
+        form.errors.data_termino = "Data inválida";
+    } else {
+        form.errors.data_termino = "";
+    }
+};
+
+const validateNome = () => {
+    form.errors.nome = nomeRegex.test(form.nome) ? "" : "Nome inválido";
+};
+const validateDescricao = () => {
+    form.errors.descricao = nomeRegex.test(form.descricao)
+        ? ""
+        : "Descrição inválido";
+};
+const validateDuracao = () => {
+    const duracaoRegex = /[A-Za-z0-9]+/;
+    form.errors.duracao = duracaoRegex.test(form.duracao)
+        ? ""
+        : "Duração inválido";
+};
+const validatePreco = () => {
+    form.errors.preco = precoRegex.test(form.preco) ? "" : "Preço inválido";
+};
+
+const validateVagas = () => {
+    form.errors.vagas = idRegex.test(form.vagas) ? "" : "Valor inválido";
+};
 watch(search, (value) => {
     router.get(
         "/cursos",
@@ -270,6 +314,7 @@ const addCurso = () => {
                                 id="nome"
                                 v-model="form.nome"
                                 autocomplete="given-name"
+                                @input="validateNome"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -290,6 +335,7 @@ const addCurso = () => {
                                 name="descricao"
                                 id="descricao"
                                 v-model="form.descricao"
+                                @input="validateDescricao"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -314,6 +360,7 @@ const addCurso = () => {
                                 name="duracao"
                                 id="duracao"
                                 v-model="form.duracao"
+                                @input="validateDuracao"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -334,6 +381,7 @@ const addCurso = () => {
                                 name="preco"
                                 id="preco"
                                 v-model="form.preco"
+                                @input="validatePreco"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -358,6 +406,7 @@ const addCurso = () => {
                                 name="data_inicio"
                                 id="data_inicio"
                                 v-model="form.data_inicio"
+                                @input="validateDataInicio"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -378,6 +427,7 @@ const addCurso = () => {
                                 name="data_termino"
                                 id="data_termino"
                                 v-model="form.data_termino"
+                                @input="validateDataTermino"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -402,6 +452,7 @@ const addCurso = () => {
                                 name="local"
                                 id="local"
                                 v-model="form.errors.local"
+                                @input="validateNome"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -422,6 +473,7 @@ const addCurso = () => {
                                 name="vagas"
                                 id="vagas"
                                 v-model="form.vagas"
+                                @input="validateVagas"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
