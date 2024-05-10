@@ -16,6 +16,7 @@ class CursosController extends Controller
                 ->when($request->input('search'), function ($query, $search) {
                     $query->where('nome', 'like', "%{$search}%");
                 })
+                ->orderByDesc('created_at', 'desc')
                 ->paginate(5)
                 ->withQueryString()
             /**->through(fn($student) => [
