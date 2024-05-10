@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CursosController;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -31,6 +32,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $cursoController = new CursosController();
+        $categoriaController = new CategoriaController();
         $cursos = $cursoController->index();
         $academicLevel = $cursoController->getAllAcademicLevel();
         //$cursosName = $cursos->pluck('nome', 'id');
@@ -41,6 +43,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'cursos' => $cursos,
             'academic_level' => $academicLevel,
+            'categorie' => $categoriaController->index(),
         ];
     }
 }
