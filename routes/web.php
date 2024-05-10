@@ -90,7 +90,7 @@ Route::get('/cursos', [
     CursosController::class, 'courses'
 ])->middleware(['auth', 'verified'])->name('cursos');
 
-Route::put('/cursos', [
+Route::post('cursos/create', [
     CursosController::class, 'store'
 ])->middleware(['auth', 'verified'])->name('cursos.store');
 
