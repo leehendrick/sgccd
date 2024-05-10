@@ -10,6 +10,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
+import Swal from "sweetalert2";
 
 const Props = defineProps({
     values: Object,
@@ -96,7 +97,25 @@ watch(search, (value) => {
 });
 
 const close = () => {
-    display.value = false;
+    Swal.fire({
+        title: "Tem certeza?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#2dc61a",
+        cancelButtonText: "Não",
+        confirmButtonText: "Yes, cancel it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            showForm.value = false;
+            Swal.fire({
+                title: "Cancelado!",
+                text: "Cancelado com sucesso.",
+                icon: "success",
+            });
+        }
+    });
 };
 
 const itemEncontrado = computed(() => {
@@ -561,7 +580,7 @@ const addCurso = () => {
                 </div>
                 <div class="m-5 flex justify-end">
                     <SecondaryButton class="mx-2"> Adicionar </SecondaryButton>
-                    <SecondaryButton class="bg-red-600">
+                    <SecondaryButton class="bg-red-600" @click="close">
                         Cancel
                     </SecondaryButton>
                 </div>
