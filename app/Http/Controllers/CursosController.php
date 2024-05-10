@@ -30,7 +30,7 @@ class CursosController extends Controller
 
     public static function index()
     {
-        return Courses::where('status', '=', 'aberto')->get();
+        return Courses::where('status', '=', 'Disponível')->get();
     }
 
     public static function show($cursoId)
