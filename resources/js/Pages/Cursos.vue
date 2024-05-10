@@ -43,9 +43,9 @@ categories.value = props.categorie;
 const nomeRegex = /^[A-Za-zÀ-ú\s]{5,}$/;
 const idRegex = /^\d+$/;
 const precoRegex = /[1-9]\d*(?:\.\d{1,2})?|0\.\d{1,2}/;
+
 const validateDataInicio = () => {
     const dataInicio = new Date(form.data_inicio);
-    const dataTermino = new Date(form.data_termino);
     const today = new Date();
     if (dataInicio <= today) {
         form.errors.data_inicio = "Data inválida";
