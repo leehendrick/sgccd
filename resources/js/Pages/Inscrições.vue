@@ -108,11 +108,7 @@ const validateAreaForma = () => {
         ? ""
         : "Area de formação inválido";
 };
-const validateDataInsc = () => {
-    form.errors.data_inscricao = datasRegex.test(form.data_inscricao)
-        ? ""
-        : "Data de inscrição inválido";
-};
+
 const validateGenero = () => {
     const generoRegex = /^[MF]$/;
     form.errors.genero = generoRegex.test(form.genero) ? "" : "Género inválido";
