@@ -5,22 +5,40 @@ import Pagination from "@/Components/Pagination.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import Modal from "@/Components/Modal.vue";
 import { computed, ref, watch } from "vue";
-import { router } from "@inertiajs/vue3";
+import { router, useForm, usePage } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
+import InputError from "@/Components/InputError.vue";
 
-const props = defineProps({
+const Props = defineProps({
     values: Object,
     filters: Object,
 });
-
+const { props } = usePage();
+const form = useForm({
+    nome: "",
+    descricao: "",
+    duracao: "",
+    preco: null,
+    data_inicio: null,
+    data_termino: null,
+    local: "",
+    vagas: null,
+    requisitos: "",
+    status: "",
+    categories_id: null,
+});
 const display = ref(false);
 const showForm = ref(false);
-const search = ref(props.filters.search);
+const search = ref(Props.filters.search);
 const idSelected = ref("");
 const modalData = ref({});
+const statuSelect = ref("");
+const categories = ref([]);
+const categoriaSelected = ref("");
+
+categories.value = props.categorie;
 
 watch(search, (value) => {
     router.get(
@@ -38,10 +56,10 @@ const close = () => {
 };
 
 const itemEncontrado = computed(() => {
-    for (const chave in props.values.data) {
+    for (const chave in Props.values.data) {
         // Verificar se a chave é um ID e se corresponde ao ID procurado
-        if (props.values.data[chave].id === idSelected.value) {
-            return props.values.data[chave];
+        if (Props.values.data[chave].id === idSelected.value) {
+            return Props.values.data[chave];
         }
     }
     return null;
@@ -57,8 +75,6 @@ const showMore = (value, id) => {
 const addCurso = () => {
     showForm.value = true;
 };
-
-const agreed = ref(false);
 </script>
 
 <template>
@@ -243,33 +259,42 @@ const agreed = ref(false);
                 <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                     <div>
                         <input-label
-                            for="first-name"
+                            for="nome"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Nome do curso</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
                                 type="text"
-                                name="first-name"
-                                id="first-name"
+                                name="nome"
+                                id="nome"
+                                v-model="form.nome"
                                 autocomplete="given-name"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.nome"
                             />
                         </div>
                     </div>
                     <div>
                         <input-label
-                            for="last-name"
+                            for="descricao"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Descrição</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
                                 type="text"
-                                name="last-name"
-                                id="last-name"
-                                autocomplete="family-name"
+                                name="descricao"
+                                id="descricao"
+                                v-model="form.descricao"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.descricao"
                             />
                         </div>
                     </div>
@@ -279,33 +304,41 @@ const agreed = ref(false);
                 >
                     <div>
                         <input-label
-                            for="first-name"
+                            for="duracao"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Duração</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
                                 type="text"
-                                name="first-name"
-                                id="first-name"
-                                autocomplete="given-name"
+                                name="duracao"
+                                id="duracao"
+                                v-model="form.duracao"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.duracao"
                             />
                         </div>
                     </div>
                     <div>
                         <input-label
-                            for="last-name"
+                            for="preco"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Preço</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
-                                type="text"
-                                name="last-name"
-                                id="last-name"
-                                autocomplete="family-name"
+                                type="number"
+                                name="preco"
+                                id="preco"
+                                v-model="form.preco"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.preco"
                             />
                         </div>
                     </div>
@@ -315,33 +348,41 @@ const agreed = ref(false);
                 >
                     <div>
                         <input-label
-                            for="first-name"
+                            for="data_inicio"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Data de início</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
-                                type="text"
-                                name="first-name"
-                                id="first-name"
-                                autocomplete="given-name"
+                                type="date"
+                                name="data_inicio"
+                                id="data_inicio"
+                                v-model="form.data_inicio"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.data_inicio"
                             />
                         </div>
                     </div>
                     <div>
                         <input-label
-                            for="last-name"
+                            for="data_termino"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Data de término</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
-                                type="text"
-                                name="last-name"
-                                id="last-name"
-                                autocomplete="family-name"
+                                type="date"
+                                name="data_termino"
+                                id="data_termino"
+                                v-model="form.data_termino"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.data_termino"
                             />
                         </div>
                     </div>
@@ -351,33 +392,41 @@ const agreed = ref(false);
                 >
                     <div>
                         <input-label
-                            for="first-name"
+                            for="local"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Local</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
                                 type="text"
-                                name="first-name"
-                                id="first-name"
-                                autocomplete="given-name"
+                                name="local"
+                                id="local"
+                                v-model="form.errors.local"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.local"
                             />
                         </div>
                     </div>
                     <div>
                         <input-label
-                            for="last-name"
+                            for="vagas"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Vagas</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
-                                type="text"
-                                name="last-name"
-                                id="last-name"
-                                autocomplete="family-name"
+                                type="number"
+                                name="vagas"
+                                id="vagas"
+                                v-model="form.vagas"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.vagas"
                             />
                         </div>
                     </div>
@@ -387,33 +436,42 @@ const agreed = ref(false);
                 >
                     <div>
                         <input-label
-                            for="first-name"
+                            for="requisitos"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Requisitos</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
                                 type="text"
-                                name="first-name"
-                                id="first-name"
-                                autocomplete="given-name"
+                                name="requisitos"
+                                id="requisitos"
+                                v-model="form.requisitos"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.requisitos"
                             />
                         </div>
                     </div>
                     <div>
                         <input-label
-                            for="last-name"
+                            for="status"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Status</input-label
                         >
                         <div class="mt-2.5">
-                            <text-input
-                                type="text"
-                                name="last-name"
-                                id="last-name"
-                                autocomplete="family-name"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            <select
+                                v-model="statuSelect"
+                                @change="form.status = statuSelect"
+                                class="border rounded border-secondary focus:border-secondary focus:ring-secondary"
+                            >
+                                <option>Disponível</option>
+                                <option>Indisponível</option>
+                            </select>
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.status"
                             />
                         </div>
                     </div>
@@ -423,17 +481,28 @@ const agreed = ref(false);
                 >
                     <div>
                         <input-label
-                            for="first-name"
+                            for="categorias"
                             class="block text-sm font-semibold leading-6 text-gray-900"
                             >Categoria</input-label
                         >
                         <div class="mt-2.5">
-                            <text-input
-                                type="text"
-                                name="first-name"
-                                id="first-name"
-                                autocomplete="given-name"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            <select
+                                v-model="categoriaSelected"
+                                @change="form.categories_id = categoriaSelected"
+                                class="border rounded border-secondary focus:border-secondary focus:ring-secondary"
+                            >
+                                <option>Selecione uma opção</option>
+                                <option
+                                    v-for="item in categories"
+                                    :key="item.id"
+                                    :value="item.id"
+                                >
+                                    {{ item.nome }}
+                                </option>
+                            </select>
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.categories_id"
                             />
                         </div>
                     </div>
