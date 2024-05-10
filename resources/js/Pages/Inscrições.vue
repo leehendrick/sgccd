@@ -98,11 +98,6 @@ const validateEmail = () => {
     const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
     form.errors.email = emailRegex.test(form.email) ? "" : "Email inválido";
 };
-const validateDataNasc = () => {
-    form.errors.data_nascimento = datasRegex.test(form.data_nascimento)
-        ? ""
-        : "Data de nascimento inválido";
-};
 const validateInstituicao = () => {
     form.errors.instituicao = nomeRegex.test(form.instituicao)
         ? ""
@@ -122,9 +117,6 @@ const validateGenero = () => {
     const generoRegex = /^[MF]$/;
     form.errors.genero = generoRegex.test(form.genero) ? "" : "Género inválido";
 };
-const validateCurso = () => {
-    form.errors.curso_id = idRegex.test(form.curso_id) ? "" : "Género inválido";
-};
 const validateNivelAcadem = () => {
     form.errors.nivel_academico_id = idRegex.test(form.nivel_academico_id)
         ? ""
@@ -139,14 +131,6 @@ const validateDataNascimento = () => {
         form.errors.data_nascimento = "";
     }
 };
-
-/** Swal.fire({
-    position: "top-end",
-    icon: "success",
-    title: "Your work has been saved",
-    showConfirmButton: false,
-    timer: 1500
-  }); **/
 
 fills.value = props.cursos;
 academic_level.value = props.academic_level;
