@@ -67,6 +67,10 @@ const validateDataTermino = () => {
 const validateNome = () => {
     form.errors.nome = nomeRegex.test(form.nome) ? "" : "Nome inválido";
 };
+
+const validateLocal = () => {
+    form.errors.local = nomeRegex.test(form.local) ? "" : "Local inválido";
+};
 const validateDescricao = () => {
     form.errors.descricao = nomeRegex.test(form.descricao)
         ? ""
@@ -96,27 +100,30 @@ watch(search, (value) => {
     );
 });
 
-const close = () => {
-    Swal.fire({
-        title: "Tem certeza?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#2dc61a",
-        cancelButtonText: "Não",
-        confirmButtonText: "Yes, cancel it!",
-        allowOutsideClick: false,
-    }).then((result) => {
-        if (result.isConfirmed) {
-            showForm.value = false;
-            Swal.fire({
-                title: "Cancelado!",
-                text: "Cancelado com sucesso.",
-                icon: "success",
-            });
-        }
-    });
+const close = (flag) => {
+    if (flag) {
+        Swal.fire({
+            title: "Tem certeza?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#2dc61a",
+            cancelButtonText: "Não",
+            confirmButtonText: "Yes, cancel it!",
+            allowOutsideClick: false,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                showForm.value = false;
+                Swal.fire({
+                    title: "Cancelado!",
+                    text: "Cancelado com sucesso.",
+                    icon: "success",
+                });
+            }
+        });
+    }
+    display.value = false;
 };
 
 const itemEncontrado = computed(() => {
@@ -138,6 +145,35 @@ const showMore = (value, id) => {
 
 const addCurso = () => {
     showForm.value = true;
+};
+
+const adicionarCurso = () => {
+    form.processing = true;
+    form.post("cursos/create", {
+        onError: () => {
+            Swal.fire({
+                icon: "error",
+                title: "Houve um erro",
+                text: "Verifique os campos digitados",
+                showConfirmButton: true,
+                position: "top",
+            });
+        },
+        onSuccess: () => {
+            Swal.fire({
+                icon: "success",
+                title: "Curso registrado",
+                text: "Curso registrado  com sucesso",
+                showConfirmButton: false,
+                timer: 3000,
+                position: "top",
+            }).then(() => {
+                if (!Swal.isTimerRunning()) form.reset();
+                showForm.value = false;
+            });
+            form.processing = false;
+        },
+    });
 };
 </script>
 
@@ -242,7 +278,7 @@ const addCurso = () => {
                                         <span
                                             class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium"
                                             :class="
-                                                curso.status === 'aberto'
+                                                curso.status === 'Disponível'
                                                     ? 'bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20'
                                                     : 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-600/20'
                                             "
@@ -314,7 +350,9 @@ const addCurso = () => {
                     </p>
                 </div>
                 <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="close"> Cancel </SecondaryButton>
+                    <SecondaryButton @click="close(false)">
+                        Cancel
+                    </SecondaryButton>
                 </div>
             </div>
         </Modal>
@@ -471,8 +509,7 @@ const addCurso = () => {
                                 type="text"
                                 name="local"
                                 id="local"
-                                v-model="form.errors.local"
-                                @input="validateNome"
+                                v-model="form.local"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -580,7 +617,9 @@ const addCurso = () => {
                     </div>
                 </div>
                 <div class="m-5 flex justify-end">
-                    <SecondaryButton class="mx-2"> Adicionar </SecondaryButton>
+                    <SecondaryButton class="mx-2" @click="adicionarCurso">
+                        Adicionar
+                    </SecondaryButton>
                     <SecondaryButton class="bg-red-600" @click="close">
                         Cancel
                     </SecondaryButton>
