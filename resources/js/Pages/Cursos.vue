@@ -7,6 +7,9 @@ import Modal from "@/Components/Modal.vue";
 import { computed, ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
+import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
 
 const props = defineProps({
     values: Object,
@@ -14,6 +17,7 @@ const props = defineProps({
 });
 
 const display = ref(false);
+const showForm = ref(false);
 const search = ref(props.filters.search);
 const idSelected = ref("");
 const modalData = ref({});
@@ -49,6 +53,12 @@ const showMore = (value, id) => {
     modalData.value = itemEncontrado.value;
     console.log(modalData.value);
 };
+
+const addCurso = () => {
+    showForm.value = true;
+};
+
+const agreed = ref(false);
 </script>
 
 <template>
@@ -61,7 +71,9 @@ const showMore = (value, id) => {
                     </h1>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <primary-button type="button">Add curso</primary-button>
+                    <primary-button @click="addCurso" type="button"
+                        >Add curso</primary-button
+                    >
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                     <input
@@ -225,6 +237,214 @@ const showMore = (value, id) => {
                     <SecondaryButton @click="close"> Cancel </SecondaryButton>
                 </div>
             </div>
+        </Modal>
+        <Modal :show="showForm">
+            <form action="#" method="POST" class="mx-auto max-w-xl sm:mt-20">
+                <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                    <div>
+                        <input-label
+                            for="first-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Nome do curso</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="first-name"
+                                id="first-name"
+                                autocomplete="given-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="last-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Descrição</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="last-name"
+                                id="last-name"
+                                autocomplete="family-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="first-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Duração</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="first-name"
+                                id="first-name"
+                                autocomplete="given-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="last-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Preço</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="last-name"
+                                id="last-name"
+                                autocomplete="family-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="first-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Data de início</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="first-name"
+                                id="first-name"
+                                autocomplete="given-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="last-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Data de término</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="last-name"
+                                id="last-name"
+                                autocomplete="family-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="first-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Local</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="first-name"
+                                id="first-name"
+                                autocomplete="given-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="last-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Vagas</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="last-name"
+                                id="last-name"
+                                autocomplete="family-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="first-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Requisitos</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="first-name"
+                                id="first-name"
+                                autocomplete="given-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="last-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Status</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="last-name"
+                                id="last-name"
+                                autocomplete="family-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="first-name"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Categoria</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="first-name"
+                                id="first-name"
+                                autocomplete="given-name"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="m-5 flex justify-end">
+                    <SecondaryButton class="mx-2"> Adicionar </SecondaryButton>
+                    <SecondaryButton class="bg-red-600">
+                        Cancel
+                    </SecondaryButton>
+                </div>
+            </form>
         </Modal>
     </admin-layout>
 </template>
