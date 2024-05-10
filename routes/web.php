@@ -40,22 +40,9 @@ Route::get('inscricoes', function () {
    ]);
 })->name('page.inscricoes');
 
-Route::post('inscricoes/create', function () {
-    $attributes = request()->validate([
-        'nome' => 'required | string |',
-        'email' => 'required | string | email | unique:students,email',
-        'bi' => 'required | string | size:14 | unique:students,bi',
-        'data_nascimento' => 'required | string',
-        'instituicao' => 'required | string',
-        'area_formacao' => 'required | string',
-        'data_inscricao' => 'required | string',
-        'genero' => 'required | size:1 ',
-        'telefone' => 'required',
-        'curso_id' => 'required',
-        'nivel_academico_id' => 'required',
-    ]);
-    Students::create($attributes);
-});
+Route::post('inscricoes/create', [
+    StudentController::class, 'store'
+]);
 
 Route::get('inscricoes/{cursoId}', function ($id) {
     return CursosController::show($id);
