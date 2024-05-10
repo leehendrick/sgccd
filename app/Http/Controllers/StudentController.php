@@ -28,18 +28,20 @@ class StudentController extends Controller
     }
     public static function store(Request $request)
     {
-        $request->validate([
-            'nome' => 'required',
-            'email' => 'required|email',
-            'bi' => 'required',
-            'data_nascimento' => 'required',
-            'instituicao' => 'required',
-            'area_formacao' => 'required',
-            'data_inscricao' => 'required',
-            'genero' => 'required',
-            'telefone' => 'required'
+        $attributes = request()->validate([
+            'nome' => 'required | string |',
+            'email' => 'required | string | email | unique:students,email',
+            'bi' => 'required | string | size:14 | unique:students,bi',
+            'data_nascimento' => 'required | string',
+            'instituicao' => 'required | string',
+            'area_formacao' => 'required | string',
+            'data_inscricao' => 'required | string',
+            'genero' => 'required | size:1 ',
+            'telefone' => 'required',
+            'curso_id' => 'required',
+            'nivel_academico_id' => 'required',
         ]);
-
-        return Students::create($request->all());
+        Students::create($attributes);
+        return Inertia::location('inscricoes');
     }
 }
