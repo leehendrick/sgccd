@@ -48,7 +48,7 @@ class CursosController extends Controller
     public static function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required',
+            'nome' => 'required | unique:'.Courses::class,
             'descricao' => 'required|string',
             'duracao' => 'required|string',
             'preco' => 'required',
@@ -62,7 +62,8 @@ class CursosController extends Controller
 
         ]);
 
-        return Courses::create($request->all());
+        Courses::create($request->all());
+        return Inertia::location('cursos');
     }
 
     public static function getAllAcademicLevel()
