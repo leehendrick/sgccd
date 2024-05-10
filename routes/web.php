@@ -90,4 +90,8 @@ Route::get('/cursos', [
     CursosController::class, 'courses'
 ])->middleware(['auth', 'verified'])->name('cursos');
 
+Route::put('/cursos', [
+    CursosController::class, 'store'
+])->middleware(['auth', 'verified'])->name('cursos.store');
+
 require __DIR__.'/auth.php';
