@@ -106,6 +106,7 @@ const close = () => {
         cancelButtonColor: "#2dc61a",
         cancelButtonText: "Não",
         confirmButtonText: "Yes, cancel it!",
+        allowOutsideClick: false,
     }).then((result) => {
         if (result.isConfirmed) {
             showForm.value = false;
