@@ -50,8 +50,11 @@ const submit = async () => {
                     text: "Sua solicitação foi processada com sucesso",
                     showConfirmButton: true,
                     position: "top",
+                }).then((resul) => {
+                    if (resul.isConfirmed) {
+                        form.reset();
+                    }
                 });
-                form.reset();
             },
         },
         form,
