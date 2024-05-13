@@ -81,4 +81,8 @@ Route::post('cursos/create', [
     CursosController::class, 'store'
 ])->middleware(['auth', 'verified'])->name('cursos.store');
 
+Route::put('cursos/{id}', [
+    CursosController::class, 'update'
+])->middleware(['auth', 'verified'])->name('cursos.update');
+
 require __DIR__.'/auth.php';
