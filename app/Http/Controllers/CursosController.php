@@ -6,10 +6,11 @@ use App\Models\AcademicLevel;
 use App\Models\Courses;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class CursosController extends Controller
 {
-    public static function courses(Request $request): \Inertia\Response
+    public static function courses(Request $request): Response
     {
         return Inertia::render('Cursos',[
             'values' => Courses::query()
@@ -63,7 +64,18 @@ class CursosController extends Controller
         ]);
 
         Courses::create($request->all());
-        return Inertia::location('cursos');
+        return Inertia::render('Cursos');
+    }
+
+    public static function edit($id): Response
+    {
+        $curso = Courses::findOrFail($id);
+        return inertia::render('Cursos',['cursoEdit' => $curso]);
+    }
+
+    public static function update(Request $request, $id)
+    {
+
     }
 
     public static function getAllAcademicLevel()
