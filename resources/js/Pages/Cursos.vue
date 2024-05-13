@@ -183,6 +183,10 @@ const adicionarCurso = () => {
         },
     });
 };
+const updateCurso = (id) => {
+    form.processing = true;
+    router.put(`cursos/${id}`, modalData.value);
+};
 </script>
 
 <template>
@@ -897,7 +901,10 @@ const adicionarCurso = () => {
                     </div>
                 </div>
                 <div class="m-5 flex justify-end">
-                    <SecondaryButton class="mx-2" @click="adicionarCurso">
+                    <SecondaryButton
+                        class="mx-2"
+                        @click="updateCurso(modalData.id)"
+                    >
                         Adicionar
                     </SecondaryButton>
                     <SecondaryButton class="bg-red-600" @click="close">
