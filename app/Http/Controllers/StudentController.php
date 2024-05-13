@@ -42,6 +42,6 @@ class StudentController extends Controller
             'nivel_academico_id' => 'required',
         ]);
         Students::create($attributes);
-        return Inertia::location('inscricoes');
+        return Inertia::render('Inscricoes');
     }
 }
