@@ -75,7 +75,9 @@ class CursosController extends Controller
 
     public static function update(Request $request, $id)
     {
-
+        $curso = Courses::findOrFail($id);
+        $curso->update($request->all());
+        return Inertia::render('Cursos')->with('sucess', 'Registro atualizado com sucesso');
     }
 
     public static function getAllAcademicLevel()
