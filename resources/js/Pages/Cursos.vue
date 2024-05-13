@@ -38,6 +38,7 @@ const modalData = ref({});
 const statuSelect = ref("");
 const categories = ref([]);
 const categoriaSelected = ref("");
+const editForm = ref(false);
 
 categories.value = props.categorie;
 
@@ -115,6 +116,7 @@ const close = (flag) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 showForm.value = false;
+                editForm.value = false;
                 Swal.fire({
                     title: "Cancelado!",
                     text: "Cancelado com sucesso.",
@@ -141,6 +143,12 @@ const showMore = (value, id) => {
     idSelected.value = id;
     modalData.value = itemEncontrado.value;
     console.log(modalData.value);
+};
+
+const editCurso = (id) => {
+    editForm.value = true;
+    idSelected.value = id;
+    modalData.value = itemEncontrado.value;
 };
 
 const addCurso = () => {
@@ -296,7 +304,10 @@ const adicionarCurso = () => {
                                                 status="ver"
                                             />
                                             <TableButton status="delete" />
-                                            <TableButton status="edit" />
+                                            <TableButton
+                                                status="edit"
+                                                @click="editCurso(curso.id)"
+                                            />
                                         </div>
                                     </td>
                                 </tr>
@@ -597,6 +608,275 @@ const adicionarCurso = () => {
                         <div class="mt-2.5">
                             <select
                                 v-model="categoriaSelected"
+                                @change="form.categories_id = categoriaSelected"
+                                class="border rounded border-secondary focus:border-secondary focus:ring-secondary"
+                            >
+                                <option>Selecione uma opção</option>
+                                <option
+                                    v-for="item in categories"
+                                    :key="item.id"
+                                    :value="item.id"
+                                >
+                                    {{ item.nome }}
+                                </option>
+                            </select>
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.categories_id"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="m-5 flex justify-end">
+                    <SecondaryButton class="mx-2" @click="adicionarCurso">
+                        Adicionar
+                    </SecondaryButton>
+                    <SecondaryButton class="bg-red-600" @click="close">
+                        Cancel
+                    </SecondaryButton>
+                </div>
+            </form>
+        </Modal>
+        <Modal :show="editForm">
+            <form action="#" method="POST" class="mx-auto max-w-xl sm:mt-20">
+                <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+                    <div>
+                        <input-label
+                            for="nome"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Nome do curso</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="nome"
+                                v-model="modalData.nome"
+                                autocomplete="given-name"
+                                @input="validateNome"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.nome"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="descricao"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Descrição</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="descricao"
+                                id="descricao"
+                                v-model="modalData.descricao"
+                                @input="validateDescricao"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.descricao"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="duracao"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Duração</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="duracao"
+                                id="duracao"
+                                v-model="modalData.duracao"
+                                @input="validateDuracao"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.duracao"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="preco"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Preço</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="number"
+                                name="preco"
+                                id="preco"
+                                v-model="modalData.preco"
+                                @input="validatePreco"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.preco"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="data_inicio"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Data de início</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="date"
+                                name="data_inicio"
+                                id="data_inicio"
+                                v-model="modalData.data_inicio"
+                                @input="validateDataInicio"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.data_inicio"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="data_termino"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Data de término</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="date"
+                                name="data_termino"
+                                id="data_termino"
+                                v-model="modalData.data_termino"
+                                @input="validateDataTermino"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.data_termino"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="local"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Local</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="local"
+                                id="local"
+                                v-model="modalData.local"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.local"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="vagas"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Vagas</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="number"
+                                name="vagas"
+                                id="vagas"
+                                v-model="modalData.vagas"
+                                @input="validateVagas"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.vagas"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="requisitos"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Requisitos</input-label
+                        >
+                        <div class="mt-2.5">
+                            <text-input
+                                type="text"
+                                name="requisitos"
+                                id="requisitos"
+                                v-model="modalData.requisitos"
+                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.requisitos"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="status"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Status</input-label
+                        >
+                        <div class="mt-2.5">
+                            <select
+                                v-model="modalData.status"
+                                @change=""
+                                class="border rounded border-secondary focus:border-secondary focus:ring-secondary"
+                            >
+                                <option>Disponível</option>
+                                <option>Indisponível</option>
+                            </select>
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.status"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="categorias"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Categoria</input-label
+                        >
+                        <div class="mt-2.5">
+                            <select
+                                v-model="modalData.categories_id"
                                 @change="form.categories_id = categoriaSelected"
                                 class="border rounded border-secondary focus:border-secondary focus:ring-secondary"
                             >
