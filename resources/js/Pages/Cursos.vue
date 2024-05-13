@@ -11,6 +11,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import Swal from "sweetalert2";
+import { Inertia } from "@inertiajs/inertia";
 
 const Props = defineProps({
     values: Object,
@@ -185,7 +186,20 @@ const adicionarCurso = () => {
 };
 const updateCurso = (id) => {
     form.processing = true;
-    router.put(`cursos/${id}`, modalData.value);
+    router.put(`cursos/${id}`, modalData.value, {
+        onSuccess: () => {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1500,
+            }).then(() => {
+                editForm.value = false;
+                router.visit("/cursos");
+            });
+        },
+    });
 };
 </script>
 
