@@ -167,11 +167,11 @@ const adicionarCurso = () => {
                 showConfirmButton: false,
                 timer: 3000,
                 position: "top",
-            }).then(() => {
-                if (!Swal.isTimerRunning()) form.reset();
-                showForm.value = false;
             });
-            form.processing = false;
+            setTimeout(() => {
+                form.reset();
+                showForm.value = false;
+            }, 3000);
         },
     });
 };
