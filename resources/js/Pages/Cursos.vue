@@ -73,21 +73,41 @@ const validateNome = (value) => {
     }
     form.errors.nome = nomeRegex.test(form.nome) ? "" : "Nome inválido";
 };
-const validateDescricao = () => {
+const validateDescricao = (flag) => {
+    if (flag === 1) {
+        form.errors.descricao = nomeRegex.test(modalData.descricao)
+            ? ""
+            : "Descrição inválido";
+    }
     form.errors.descricao = nomeRegex.test(form.descricao)
         ? ""
         : "Descrição inválido";
 };
-const validateDuracao = () => {
+const validateDuracao = (flag) => {
     const duracaoRegex = /[A-Za-z0-9]+/;
+    if (flag === 1) {
+        form.errors.duracao = duracaoRegex.test(modalData.duracao)
+            ? ""
+            : "Duração inválido";
+    }
     form.errors.duracao = duracaoRegex.test(form.duracao)
         ? ""
         : "Duração inválido";
 };
-const validatePreco = () => {
+const validatePreco = (flag) => {
+    if (flag === 1) {
+        form.errors.preco = precoRegex.test(modalData.preco)
+            ? ""
+            : "Preço inválido";
+    }
     form.errors.preco = precoRegex.test(form.preco) ? "" : "Preço inválido";
 };
-const validateVagas = () => {
+const validateVagas = (flag) => {
+    if (flag === 1) {
+        form.errors.vagas = idRegex.test(modalData.vagas)
+            ? ""
+            : "Vagas inválido";
+    }
     form.errors.vagas = idRegex.test(form.vagas) ? "" : "Valor inválido";
 };
 
@@ -703,7 +723,7 @@ const updateCurso = (id, flag) => {
                                 name="descricao"
                                 id="descricao"
                                 v-model="modalData.descricao"
-                                @input="validateDescricao"
+                                @input="validateDescricao(1)"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
