@@ -36,7 +36,12 @@ const navigation = [
         current: false,
     },
     { name: "Cursos", href: "/cursos", icon: AcademicCapIcon, current: false },
-    { name: "Turmas", href: "#", icon: BuildingOfficeIcon, current: false },
+    {
+        name: "Turmas",
+        href: "/turmas",
+        icon: BuildingOfficeIcon,
+        current: false,
+    },
     { name: "Formadores", href: "#", icon: UsersIcon, current: false },
     { name: "Formandos", href: "#", icon: UserGroupIcon, current: false },
 ];
