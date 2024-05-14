@@ -85,7 +85,12 @@ Route::put('cursos/{id}', [
     CursosController::class, 'update'
 ])->middleware(['auth', 'verified'])->name('cursos.update');
 
-Route::post('cursos/{id}', [
-    cursosController::class, 'edit'
+Route::get('cursos/{id}', function ($id){
+    return CursosController::edit($id);
+})->middleware(['auth', 'verified'])->name('cursos.edit');
+
+
+Route::get('turmas', [
+
 ]);
 require __DIR__.'/auth.php';
