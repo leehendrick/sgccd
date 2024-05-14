@@ -42,6 +42,7 @@ const editForm = ref(false);
 
 categories.value = props.categorie;
 
+//Validation
 const nomeRegex = /^[A-Za-zÀ-ú\s]{5,}$/;
 const idRegex = /^\d+$/;
 const precoRegex = /[1-9]\d*(?:\.\d{1,2})?|0\.\d{1,2}/;
@@ -64,7 +65,6 @@ const validateDataTermino = () => {
         form.errors.data_termino = "";
     }
 };
-
 const validateNome = (value) => {
     if (value === 1) {
         form.errors.nome = nomeRegex.test(modalData.nome)
@@ -73,7 +73,6 @@ const validateNome = (value) => {
     }
     form.errors.nome = nomeRegex.test(form.nome) ? "" : "Nome inválido";
 };
-
 const validateDescricao = () => {
     form.errors.descricao = nomeRegex.test(form.descricao)
         ? ""
@@ -88,10 +87,10 @@ const validateDuracao = () => {
 const validatePreco = () => {
     form.errors.preco = precoRegex.test(form.preco) ? "" : "Preço inválido";
 };
-
 const validateVagas = () => {
     form.errors.vagas = idRegex.test(form.vagas) ? "" : "Valor inválido";
 };
+
 watch(search, (value) => {
     router.get(
         "/cursos",
@@ -110,6 +109,33 @@ const Toast = Swal.mixin({
     timer: 2000,
     timerProgressBar: true,
 });
+//Search data in props by id
+const itemEncontrado = computed(() => {
+    for (const chave in Props.values.data) {
+        // Verificar se a chave é um ID e se corresponde ao ID procurado
+        if (Props.values.data[chave].id === idSelected.value) {
+            return Props.values.data[chave];
+        }
+    }
+    return null;
+});
+
+const showMore = (value, id) => {
+    display.value = value;
+    idSelected.value = id;
+    modalData.value = itemEncontrado.value;
+    console.log(modalData.value);
+};
+
+const editCurso = (id) => {
+    editForm.value = true;
+    idSelected.value = id;
+    modalData.value = itemEncontrado.value;
+};
+
+const addCurso = () => {
+    showForm.value = true;
+};
 
 const close = (flag) => {
     if (flag) {
@@ -138,33 +164,6 @@ const close = (flag) => {
     display.value = false;
 };
 
-const itemEncontrado = computed(() => {
-    for (const chave in Props.values.data) {
-        // Verificar se a chave é um ID e se corresponde ao ID procurado
-        if (Props.values.data[chave].id === idSelected.value) {
-            return Props.values.data[chave];
-        }
-    }
-    return null;
-});
-
-const showMore = (value, id) => {
-    display.value = value;
-    idSelected.value = id;
-    modalData.value = itemEncontrado.value;
-    console.log(modalData.value);
-};
-
-const editCurso = (id) => {
-    editForm.value = true;
-    idSelected.value = id;
-    modalData.value = itemEncontrado.value;
-};
-
-const addCurso = () => {
-    showForm.value = true;
-};
-
 const adicionarCurso = () => {
     form.processing = true;
     form.post("cursos/create", {
@@ -188,29 +187,39 @@ const adicionarCurso = () => {
         },
     });
 };
-const updateCurso = (id) => {
-    form.processing = true;
-    router.put(`cursos/${id}`, modalData.value, {
-        onSuccess: () => {
-            Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Your work has been saved",
-                showConfirmButton: false,
-                timer: 1500,
-            }).then(() => {
-                router.visit("/cursos");
-            });
-        },
-
-        onError: () => {
-            Toast.fire({
-                icon: "error",
-                title: "Houve um Erro",
-                text: "Verifique os campos digitados",
-            });
-        },
-    });
+const updateCurso = (id, flag) => {
+    if (!flag) {
+        router.put(`cursos/${id}`, modalData.value, {
+            onSuccess: () => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Your work has been saved",
+                    showConfirmButton: false,
+                    timer: 1500,
+                }).then(() => {
+                    router.visit("/cursos");
+                });
+            },
+            onError: () => {
+                Toast.fire({
+                    icon: "error",
+                    title: "Houve um Erro",
+                    text: "Verifique os campos digitados",
+                });
+            },
+        });
+    } else {
+        router.visit("/cursos");
+        Toast.fire({
+            title: "Cancelado!",
+            text: "Cancelado com sucesso.",
+            icon: "success",
+        });
+    }
+};
+const cancelar = () => {
+    updateCurso(0, true);
 };
 </script>
 
@@ -928,11 +937,11 @@ const updateCurso = (id) => {
                 <div class="m-5 flex justify-end">
                     <SecondaryButton
                         class="mx-2"
-                        @click="updateCurso(modalData.id)"
+                        @click="updateCurso(modalData.id, false)"
                     >
                         Atualizar
                     </SecondaryButton>
-                    <SecondaryButton class="bg-red-600" @click="close">
+                    <SecondaryButton class="bg-red-600" @click="cancelar">
                         Cancel
                     </SecondaryButton>
                 </div>
