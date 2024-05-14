@@ -174,22 +174,17 @@ const adicionarCurso = () => {
     form.processing = true;
     form.post("cursos/create", {
         onError: () => {
-            Swal.fire({
+            Toast.fire({
                 icon: "error",
                 title: "Houve um erro",
                 text: "Verifique os campos digitados",
-                showConfirmButton: true,
-                position: "top",
             });
         },
         onSuccess: () => {
-            Swal.fire({
+            Toast.fire({
                 icon: "success",
                 title: "Curso registrado",
-                text: "Curso registrado  com sucesso",
-                showConfirmButton: false,
-                timer: 3000,
-                position: "top",
+                text: "Curso registrado com sucesso",
             });
             setTimeout(() => {
                 form.reset();
