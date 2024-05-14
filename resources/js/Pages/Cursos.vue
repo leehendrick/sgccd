@@ -11,7 +11,6 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import Swal from "sweetalert2";
-import { Inertia } from "@inertiajs/inertia";
 
 const Props = defineProps({
     values: Object,
@@ -73,12 +72,8 @@ const validateNome = (value) => {
             : "Nome inválido";
     }
     form.errors.nome = nomeRegex.test(form.nome) ? "" : "Nome inválido";
-    x;
 };
 
-const validateLocal = () => {
-    form.errors.local = nomeRegex.test(form.local) ? "" : "Local inválido";
-};
 const validateDescricao = () => {
     form.errors.descricao = nomeRegex.test(form.descricao)
         ? ""
