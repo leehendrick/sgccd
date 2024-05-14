@@ -38,7 +38,7 @@ class CursosController extends Controller
     {
         $curso  = Courses::find($cursoId);
         if ($curso){
-            return inertia::render('Cursos',['cursoEdit' => $curso]);
+            return response()->json(['cursoFound' => $curso], status: 200);
         }
         else{
             return response()->json(['ERROR' => 'Nenhum curso encontrado'], status: 404);
@@ -70,7 +70,7 @@ class CursosController extends Controller
     public static function edit($id): Response
     {
         $curso = Courses::findOrFail($id);
-        return inertia::render('Cursos',['cursoEdit' => $curso]);
+        return inertia::render('Cursos',['editCurso' => $curso]);
     }
 
     public static function update(Request $request, $id)
