@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\CursosController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
@@ -90,7 +91,9 @@ Route::get('cursos/{id}', function ($id){
 })->middleware(['auth', 'verified'])->name('cursos.edit');
 
 
-Route::get('turmas', [
+Route::get('turmas', function (){
+    return Inertia::render('Turmas', []);
+})->middleware(['auth', 'verified']);
 
-]);
+
 require __DIR__.'/auth.php';
