@@ -198,14 +198,12 @@ const updateCurso = (id) => {
     router.put(`cursos/${id}`, modalData.value, {
         preserveScroll: true,
         onSuccess: () => {
-            Swal.fire({
-                position: "top-end",
+            Toast.fire({
                 icon: "success",
                 title: "Your work has been saved",
                 showConfirmButton: false,
                 timer: 1500,
             }).then(() => {
-                editForm.value = false;
                 router.visit("/cursos");
             });
         },
