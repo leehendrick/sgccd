@@ -66,8 +66,14 @@ const validateDataTermino = () => {
     }
 };
 
-const validateNome = () => {
+const validateNome = (value) => {
+    if (value === 1) {
+        form.errors.nome = nomeRegex.test(modalData.nome)
+            ? ""
+            : "Nome inválido";
+    }
     form.errors.nome = nomeRegex.test(form.nome) ? "" : "Nome inválido";
+    x;
 };
 
 const validateLocal = () => {
@@ -102,12 +108,20 @@ watch(search, (value) => {
     );
 });
 
+const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+});
+
 const close = (flag) => {
     if (flag) {
         Swal.fire({
             title: "Tem certeza?",
             text: "You won't be able to revert this!",
-            icon: "warning",
+            icon: "question",
             showCancelButton: true,
             confirmButtonColor: "#d33",
             cancelButtonColor: "#2dc61a",
@@ -118,7 +132,7 @@ const close = (flag) => {
             if (result.isConfirmed) {
                 showForm.value = false;
                 editForm.value = false;
-                Swal.fire({
+                Toast.fire({
                     title: "Cancelado!",
                     text: "Cancelado com sucesso.",
                     icon: "success",
@@ -187,6 +201,7 @@ const adicionarCurso = () => {
 const updateCurso = (id) => {
     form.processing = true;
     router.put(`cursos/${id}`, modalData.value, {
+        preserveScroll: true,
         onSuccess: () => {
             Swal.fire({
                 position: "top-end",
@@ -670,7 +685,7 @@ const updateCurso = (id) => {
                                 name="nome"
                                 v-model="modalData.nome"
                                 autocomplete="given-name"
-                                @input="validateNome"
+                                @input="validateNome(1)"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -919,7 +934,7 @@ const updateCurso = (id) => {
                         class="mx-2"
                         @click="updateCurso(modalData.id)"
                     >
-                        Adicionar
+                        Atualizar
                     </SecondaryButton>
                     <SecondaryButton class="bg-red-600" @click="close">
                         Cancel
