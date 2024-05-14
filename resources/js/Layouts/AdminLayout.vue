@@ -234,7 +234,7 @@ const sidebarOpen = ref(false);
                                     <DashLink
                                         :href="item.href"
                                         :active="$page.component === item.name"
-                                        class="group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                        class="group flex gap-x-3 rounded-full p-2 text-sm leading-6 font-semibold"
                                     >
                                         <component
                                             :is="item.icon"
