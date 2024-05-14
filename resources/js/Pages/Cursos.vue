@@ -196,7 +196,6 @@ const adicionarCurso = () => {
 const updateCurso = (id) => {
     form.processing = true;
     router.put(`cursos/${id}`, modalData.value, {
-        preserveScroll: true,
         onSuccess: () => {
             Swal.fire({
                 position: "center",
@@ -206,6 +205,14 @@ const updateCurso = (id) => {
                 timer: 1500,
             }).then(() => {
                 router.visit("/cursos");
+            });
+        },
+
+        onError: () => {
+            Toast.fire({
+                icon: "error",
+                title: "Houve um Erro",
+                text: "Verifique os campos digitados",
             });
         },
     });
