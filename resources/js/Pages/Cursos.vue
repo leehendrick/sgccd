@@ -109,6 +109,7 @@ const Toast = Swal.mixin({
     timer: 2000,
     timerProgressBar: true,
 });
+
 //Search data in props by id
 const itemEncontrado = computed(() => {
     for (const chave in Props.values.data) {
@@ -151,8 +152,7 @@ const close = (flag) => {
             allowOutsideClick: false,
         }).then((result) => {
             if (result.isConfirmed) {
-                showForm.value = false;
-                editForm.value = false;
+                router.visit("/cursos");
                 Toast.fire({
                     title: "Cancelado!",
                     text: "Cancelado com sucesso.",
@@ -210,16 +210,8 @@ const updateCurso = (id, flag) => {
             },
         });
     } else {
-        router.visit("/cursos");
-        Toast.fire({
-            title: "Cancelado!",
-            text: "Cancelado com sucesso.",
-            icon: "success",
-        });
+        close(true);
     }
-};
-const cancelar = () => {
-    updateCurso(0, true);
 };
 </script>
 
@@ -941,7 +933,10 @@ const cancelar = () => {
                     >
                         Atualizar
                     </SecondaryButton>
-                    <SecondaryButton class="bg-red-600" @click="cancelar">
+                    <SecondaryButton
+                        class="bg-red-600"
+                        @click="updateCurso(0, true)"
+                    >
                         Cancel
                     </SecondaryButton>
                 </div>
