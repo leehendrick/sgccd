@@ -86,7 +86,7 @@ Route::put('cursos/{id}', [
     CursosController::class, 'update'
 ])->middleware(['auth', 'verified'])->name('cursos.update');
 
-Route::get('cursos/{id}', function ($id){
+Route::post('cursos/{id}', function ($id){
     return CursosController::edit($id);
 })->middleware(['auth', 'verified'])->name('cursos.edit');
 
