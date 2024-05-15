@@ -1,5 +1,5 @@
 <script setup>
-import { Head, useForm, usePage } from "@inertiajs/vue3";
+import { Head, router, useForm, usePage } from "@inertiajs/vue3";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
 import { onMounted, ref } from "vue";
 import TextInput from "@/Components/TextInput.vue";
@@ -30,35 +30,33 @@ const academic_level = ref([]);
 const genero = ref([]);
 const { props } = usePage();
 
-const submit = async () => {
-    form.post(
-        "inscricoes/create",
-        {
-            onError: () => {
-                Swal.fire({
-                    icon: "error",
-                    title: "Houve um erro",
-                    text: "Verifique os campos digitados",
-                    showConfirmButton: true,
-                    position: "top",
-                });
-            },
-            onSuccess: () => {
-                Swal.fire({
-                    icon: "success",
-                    title: "Solicitação enviada",
-                    text: "Sua solicitação foi processada com sucesso",
-                    showConfirmButton: true,
-                    position: "top",
-                }).then((resul) => {
-                    if (resul.isConfirmed) {
-                        form.reset();
-                    }
-                });
-            },
+const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+});
+
+const submit = () => {
+    form.post("inscricoes/create", {
+        onError: () => {
+            Toast.fire({
+                icon: "error",
+                title: "Houve um erro",
+                text: "Verifique os campos digitados",
+            });
         },
-        form,
-    );
+        onSuccess: () => {
+            Swal.fire({
+                icon: "success",
+                title: "Solicitação enviada",
+                text: "Sua solicitação foi processada com sucesso",
+                showConfirmButton: true,
+                position: "center",
+            });
+        },
+    });
 };
 
 async function getCurso(id) {
