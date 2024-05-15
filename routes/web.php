@@ -92,8 +92,12 @@ Route::get('cursos/{id}', function ($id){
 
 
 Route::get('turmas', function (){
-    return Inertia::render('Turmas', []);
+    return Inertia::render('Turmas');
 })->middleware(['auth', 'verified']);
+
+Route::get('/turmas/index', [
+    StudentController::class, 'getTurmas'
+])->middleware(['auth', 'verified'])->name('turmas.index');
 
 
 require __DIR__.'/auth.php';
