@@ -20,7 +20,6 @@ class ClassesController extends Controller
             //Aqui nós determinamos que campos da bd o props vai receber
             ])**/
             ,
-
             'filters' => $request->only(['search'])
         ]);
     }
