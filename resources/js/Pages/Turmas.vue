@@ -401,11 +401,11 @@ const validateDescricao = () => {
                             >
                                 <option>Selecione uma opção</option>
                                 <option
-                                    v-for="item in categories"
+                                    v-for="item in horarios"
                                     :key="item.id"
                                     :value="item.id"
                                 >
-                                    {{ item.nome }}
+                                    {{ item.id }}
                                 </option>
                             </select>
                             <input-error
