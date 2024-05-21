@@ -177,7 +177,7 @@ const addTurma = () => {
                         <input-label
                             for="nome"
                             class="block text-sm font-semibold leading-6 text-gray-900"
-                            >Nome do curso</input-label
+                            >Nome da turma</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
@@ -197,68 +197,22 @@ const addTurma = () => {
                     </div>
                     <div>
                         <input-label
-                            for="descricao"
+                            for="local"
                             class="block text-sm font-semibold leading-6 text-gray-900"
-                            >Descrição</input-label
+                            >Local</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
                                 type="text"
-                                name="descricao"
-                                id="descricao"
-                                v-model="form.descricao"
+                                name="local"
+                                id="local"
+                                v-model="form.local"
                                 @input="validateDescricao"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
                                 class="mt-2"
-                                :message="form.errors.descricao"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
-                >
-                    <div>
-                        <input-label
-                            for="duracao"
-                            class="block text-sm font-semibold leading-6 text-gray-900"
-                            >Duração</input-label
-                        >
-                        <div class="mt-2.5">
-                            <text-input
-                                type="text"
-                                name="duracao"
-                                id="duracao"
-                                v-model="form.duracao"
-                                @input="validateDuracao"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                            <input-error
-                                class="mt-2"
-                                :message="form.errors.duracao"
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <input-label
-                            for="preco"
-                            class="block text-sm font-semibold leading-6 text-gray-900"
-                            >Preço</input-label
-                        >
-                        <div class="mt-2.5">
-                            <text-input
-                                type="number"
-                                name="preco"
-                                id="preco"
-                                v-model="form.preco"
-                                @input="validatePreco"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                            <input-error
-                                class="mt-2"
-                                :message="form.errors.preco"
+                                :message="form.errors.local"
                             />
                         </div>
                     </div>
@@ -270,7 +224,7 @@ const addTurma = () => {
                         <input-label
                             for="data_inicio"
                             class="block text-sm font-semibold leading-6 text-gray-900"
-                            >Data de início</input-label
+                            >Data de ínicio</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
@@ -278,7 +232,7 @@ const addTurma = () => {
                                 name="data_inicio"
                                 id="data_inicio"
                                 v-model="form.data_inicio"
-                                @input="validateDataInicio"
+                                @input="validateDuracao"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -299,7 +253,7 @@ const addTurma = () => {
                                 name="data_termino"
                                 id="data_termino"
                                 v-model="form.data_termino"
-                                @input="validateDataTermino"
+                                @input="validatePreco"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -314,66 +268,21 @@ const addTurma = () => {
                 >
                     <div>
                         <input-label
-                            for="local"
+                            for="descricao"
                             class="block text-sm font-semibold leading-6 text-gray-900"
-                            >Local</input-label
+                            >Descrição</input-label
                         >
                         <div class="mt-2.5">
                             <text-input
                                 type="text"
-                                name="local"
-                                id="local"
-                                v-model="form.local"
+                                name="descricao"
+                                id="descricao"
+                                v-model="form.descricao"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
                                 class="mt-2"
-                                :message="form.errors.local"
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <input-label
-                            for="vagas"
-                            class="block text-sm font-semibold leading-6 text-gray-900"
-                            >Vagas</input-label
-                        >
-                        <div class="mt-2.5">
-                            <text-input
-                                type="number"
-                                name="vagas"
-                                id="vagas"
-                                v-model="form.vagas"
-                                @input="validateVagas"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                            <input-error
-                                class="mt-2"
-                                :message="form.errors.vagas"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
-                >
-                    <div>
-                        <input-label
-                            for="requisitos"
-                            class="block text-sm font-semibold leading-6 text-gray-900"
-                            >Requisitos</input-label
-                        >
-                        <div class="mt-2.5">
-                            <text-input
-                                type="text"
-                                name="requisitos"
-                                id="requisitos"
-                                v-model="form.requisitos"
-                                class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                            <input-error
-                                class="mt-2"
-                                :message="form.errors.requisitos"
+                                :message="form.errors.descricao"
                             />
                         </div>
                     </div>
@@ -404,14 +313,14 @@ const addTurma = () => {
                 >
                     <div>
                         <input-label
-                            for="categorias"
+                            for="curso"
                             class="block text-sm font-semibold leading-6 text-gray-900"
-                            >Categoria</input-label
+                            >Curso</input-label
                         >
                         <div class="mt-2.5">
                             <select
                                 v-model="categoriaSelected"
-                                @change="form.categories_id = categoriaSelected"
+                                @change="form.curso_id = categoriaSelected"
                                 class="border rounded border-secondary focus:border-secondary focus:ring-secondary"
                             >
                                 <option>Selecione uma opção</option>
@@ -425,7 +334,65 @@ const addTurma = () => {
                             </select>
                             <input-error
                                 class="mt-2"
-                                :message="form.errors.categories_id"
+                                :message="form.errors.curso_id"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <input-label
+                            for="formador"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Formador</input-label
+                        >
+                        <div class="mt-2.5">
+                            <select
+                                v-model="categoriaSelected"
+                                @change="form.instrutor_id = categoriaSelected"
+                                class="border rounded border-secondary focus:border-secondary focus:ring-secondary"
+                            >
+                                <option>Selecione uma opção</option>
+                                <option
+                                    v-for="item in categories"
+                                    :key="item.id"
+                                    :value="item.id"
+                                >
+                                    {{ item.nome }}
+                                </option>
+                            </select>
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.instrutor_id"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-3 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+                >
+                    <div>
+                        <input-label
+                            for="horario"
+                            class="block text-sm font-semibold leading-6 text-gray-900"
+                            >Horário</input-label
+                        >
+                        <div class="mt-2.5">
+                            <select
+                                v-model="categoriaSelected"
+                                @change="form.horario_id = categoriaSelected"
+                                class="border rounded border-secondary focus:border-secondary focus:ring-secondary"
+                            >
+                                <option>Selecione uma opção</option>
+                                <option
+                                    v-for="item in categories"
+                                    :key="item.id"
+                                    :value="item.id"
+                                >
+                                    {{ item.nome }}
+                                </option>
+                            </select>
+                            <input-error
+                                class="mt-2"
+                                :message="form.errors.horario_id"
                             />
                         </div>
                     </div>
