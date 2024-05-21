@@ -67,10 +67,10 @@ class CursosController extends Controller
         return Inertia::render('Cursos');
     }
 
-    public static function edit($id): Response
+    public static function edit($id): \Illuminate\Http\JsonResponse
     {
         $curso = Courses::findOrFail($id);
-        return inertia::render('Cursos',['editCurso' => $curso]);
+        return response()->json(['editCurso' => $curso]);
     }
 
     public static function update(Request $request, $id)
