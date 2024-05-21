@@ -46,7 +46,7 @@ class CursosController extends Controller
 
     }
 
-    public static function store(Request $request)
+    public static function store(Request $request): Response
     {
         $request->validate([
             'nome' => 'required | unique:'.Courses::class,
