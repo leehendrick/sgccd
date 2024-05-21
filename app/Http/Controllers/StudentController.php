@@ -28,7 +28,7 @@ class StudentController extends Controller
     }
     public static function store(Request $request): \Inertia\Response
     {
-        $attributes = request()->validate([
+        $request->validate([
             'nome' => 'required | string |',
             'email' => 'required | string | email | unique:students,email',
             'bi' => 'required | string | size:14 | unique:students,bi',
@@ -41,7 +41,7 @@ class StudentController extends Controller
             'curso_id' => 'required',
             'nivel_academico_id' => 'required',
         ]);
-        Students::create($attributes);
-        return Inertia::render('Inscricoes');
+        Students::create($request->all());
+        return Inertia::render('Inscrições');
     }
 }
