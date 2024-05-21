@@ -67,6 +67,7 @@ const validateDataTermino = () => {
 };
 const validateNome = (value) => {
     if (value === 1) {
+        alert(modalData.nome);
         form.errors.nome = nomeRegex.test(modalData.nome)
             ? ""
             : "Nome inválido";
@@ -145,10 +146,9 @@ const showMore = (value, id) => {
     display.value = value;
     idSelected.value = id;
     modalData.value = itemEncontrado.value;
-    console.log(modalData.value);
 };
 
-const editCurso = (id) => {
+const editCurso = async (id) => {
     editForm.value = true;
     idSelected.value = id;
     modalData.value = itemEncontrado.value;
@@ -207,9 +207,10 @@ const adicionarCurso = () => {
         },
     });
 };
+
 const updateCurso = (id, flag) => {
     if (!flag) {
-        router.put(`cursos/${id}`, modalData.value, {
+        router.patch(`cursos/${id}`, modalData.value, {
             onSuccess: () => {
                 Swal.fire({
                     position: "center",
