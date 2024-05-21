@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CursosController;
+use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\InstrutorController;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -35,6 +36,7 @@ class HandleInertiaRequests extends Middleware
         $cursoController = new CursosController();
         $categoriaController = new CategoriaController();
         $formador = new InstrutorController();
+        $horarios = new HorarioController();
         $cursos = $cursoController->index();
         $academicLevel = $cursoController->getAllAcademicLevel();
         //$cursosName = $cursos->pluck('nome', 'id');
@@ -47,6 +49,7 @@ class HandleInertiaRequests extends Middleware
             'academic_level' => $academicLevel,
             'categorie' => $categoriaController->index(),
             'instrutor' => $formador->index(),
+            'horarios' => $horarios->index()
         ];
     }
 }
