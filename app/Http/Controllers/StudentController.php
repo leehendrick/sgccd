@@ -26,7 +26,7 @@ class StudentController extends Controller
             'filters' => $request->only(['search'])
         ]);
     }
-    public static function store(Request $request)
+    public static function store(Request $request): \Inertia\Response
     {
         $attributes = request()->validate([
             'nome' => 'required | string |',
