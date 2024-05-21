@@ -7,40 +7,31 @@ import {
     ArrowUpCircleIcon,
 } from "@heroicons/vue/20/solid";
 
-const secondaryNavigation = [
-    { name: "Last 7 days", href: "#", current: true },
-    { name: "Last 30 days", href: "#", current: false },
-    { name: "All-time", href: "#", current: false },
-];
 const stats = [
     {
-        name: "Revenue",
-        value: "$405,091.00",
-        change: "+4.75%",
+        name: "Solicitações",
+        value: "24",
         changeType: "positive",
     },
     {
-        name: "Overdue invoices",
-        value: "$12,787.00",
-        change: "+54.02%",
+        name: "Turmas",
+        value: "0",
         changeType: "negative",
     },
     {
-        name: "Outstanding invoices",
-        value: "$245,988.00",
-        change: "-1.39%",
+        name: "Formandos",
+        value: "0",
         changeType: "positive",
     },
     {
-        name: "Expenses",
-        value: "$30,156.00",
-        change: "+10.18%",
+        name: "Cursos",
+        value: "14",
         changeType: "negative",
     },
 ];
 const statuses = {
-    Paid: "text-green-700 bg-green-50 ring-green-600/20",
-    Withdraw: "text-gray-600 bg-gray-50 ring-gray-500/10",
+    Novo: "text-green-700 bg-green-50 ring-green-600/20",
+    Visualizado: "text-gray-600 bg-gray-50 ring-gray-500/10",
     Overdue: "text-red-700 bg-red-50 ring-red-600/10",
 };
 const days = [
@@ -50,35 +41,33 @@ const days = [
         transactions: [
             {
                 id: 1,
-                invoiceNumber: "00012",
-                href: "#",
-                amount: "$7,600.00 USD",
-                tax: "$500.00",
-                status: "Paid",
-                client: "Reform",
-                description: "Website redesign",
-                icon: ArrowUpCircleIcon,
-            },
-            {
-                id: 2,
-                invoiceNumber: "00011",
-                href: "#",
-                amount: "$10,000.00 USD",
-                status: "Withdraw",
-                client: "Tom Cook",
-                description: "Salary",
+                href: "/solicitacoes",
+                amount: "Solicitação de curso",
+                tax: "Hendrick Nkuba",
+                status: "Novo",
+                client: "Curso",
+                description: "Curso de Excel Avançado",
                 icon: ArrowDownCircleIcon,
             },
             {
-                id: 3,
-                invoiceNumber: "00009",
-                href: "#",
-                amount: "$2,000.00 USD",
-                tax: "$130.00",
-                status: "Overdue",
-                client: "Tuple",
-                description: "Logo design",
-                icon: ArrowPathIcon,
+                id: 1,
+                href: "/solicitacoes",
+                amount: "Solicitação de curso",
+                tax: "Hendrick Nkuba",
+                status: "Novo",
+                client: "Curso",
+                description: "Curso de Excel Avançado",
+                icon: ArrowDownCircleIcon,
+            },
+            {
+                id: 1,
+                href: "/solicitacoes",
+                amount: "Solicitação de curso",
+                tax: "Hendrick Nkuba",
+                status: "Novo",
+                client: "Curso",
+                description: "Curso de Excel Avançado",
+                icon: ArrowDownCircleIcon,
             },
         ],
     },
@@ -87,15 +76,14 @@ const days = [
         dateTime: "2023-03-21",
         transactions: [
             {
-                id: 4,
-                invoiceNumber: "00010",
-                href: "#",
-                amount: "$14,000.00 USD",
-                tax: "$900.00",
-                status: "Paid",
-                client: "SavvyCal",
-                description: "Website redesign",
-                icon: ArrowUpCircleIcon,
+                id: 1,
+                href: "/solicitacoes",
+                amount: "Solicitação de curso",
+                tax: "Hendrick Nkuba",
+                status: "Visualizado",
+                client: "Curso",
+                description: "Curso de Excel Avançado",
+                icon: ArrowDownCircleIcon,
             },
         ],
     },
@@ -321,7 +309,6 @@ const clients = [
                                                                 {{
                                                                     transaction.tax
                                                                 }}
-                                                                tax
                                                             </div>
                                                         </div>
                                                     </div>
