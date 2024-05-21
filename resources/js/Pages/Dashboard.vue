@@ -149,23 +149,8 @@ const clients = [
                         <h1
                             class="text-base font-semibold leading-7 text-gray-900"
                         >
-                            Cashflow
+                            Statistics
                         </h1>
-                        <div
-                            class="order-last flex w-full gap-x-8 text-sm font-semibold leading-6 sm:order-none sm:w-auto sm:border-l sm:border-gray-200 sm:pl-6 sm:leading-7"
-                        >
-                            <a
-                                v-for="item in secondaryNavigation"
-                                :key="item.name"
-                                :href="item.href"
-                                :class="
-                                    item.current
-                                        ? 'text-primary'
-                                        : 'text-gray-700'
-                                "
-                                >{{ item.name }}</a
-                            >
-                        </div>
                     </div>
                 </header>
 
