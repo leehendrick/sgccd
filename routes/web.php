@@ -81,14 +81,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/cursos/{id}', [CursosController::class, 'update'])->name('cursos.update');
 });
 
-
-Route::get('turmas', function (){
-    return Inertia::render('Turmas');
-})->middleware(['auth', 'verified']);
-
-Route::get('/turmas/index', [
-    StudentController::class, 'getTurmas'
-])->middleware(['auth', 'verified'])->name('turmas.index');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('turmas', [ClassesController::class, 'getTurmas'])->name('turmas.index');
+});
 
 
 require __DIR__.'/auth.php';
