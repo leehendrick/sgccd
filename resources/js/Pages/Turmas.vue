@@ -8,13 +8,16 @@ import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TableButton from "@/Components/TableButton.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Swal from "sweetalert2";
-import { useForm, usePage } from "@inertiajs/vue3";
+import { useForm, router } from "@inertiajs/vue3";
 
 const Props = defineProps({
     values: Object,
     filters: Object,
+    cursos: Object,
+    horarios: Object,
+    instrutor: Object,
 });
 
 const search = ref(Props.filters.search);
@@ -42,6 +45,20 @@ const showForm = ref(false);
 
 const addTurma = () => {
     showForm.value = true;
+};
+
+const nomeRegex = /^[A-Za-zÀ-ú\s]{5,}$/;
+const idRegex = /^\d+$/;
+const validateNome = () => {
+    form.errors.nome = nomeRegex.test(form.nome) ? "" : "Nome inválido";
+};
+const validateLocal = () => {
+    form.errors.local = nomeRegex.test(form.local) ? "" : "Local inválido";
+};
+const validateDescricao = () => {
+    form.errors.descricao = nomeRegex.test(form.descricao)
+        ? ""
+        : "Descrição inválido";
 };
 </script>
 
@@ -207,7 +224,7 @@ const addTurma = () => {
                                 name="local"
                                 id="local"
                                 v-model="form.local"
-                                @input="validateDescricao"
+                                @input="validateLocal"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -232,7 +249,7 @@ const addTurma = () => {
                                 name="data_inicio"
                                 id="data_inicio"
                                 v-model="form.data_inicio"
-                                @input="validateDuracao"
+                                @input="validateDataInicio"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -253,7 +270,7 @@ const addTurma = () => {
                                 name="data_termino"
                                 id="data_termino"
                                 v-model="form.data_termino"
-                                @input="validatePreco"
+                                @input="validateDataTermino"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -278,6 +295,7 @@ const addTurma = () => {
                                 name="descricao"
                                 id="descricao"
                                 v-model="form.descricao"
+                                @input="validateDescricao"
                                 class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                             <input-error
@@ -319,13 +337,13 @@ const addTurma = () => {
                         >
                         <div class="mt-2.5">
                             <select
-                                v-model="categoriaSelected"
-                                @change="form.curso_id = categoriaSelected"
+                                v-model="cursoSelected"
+                                @change="form.curso_id = cursoSelected"
                                 class="border rounded border-secondary focus:border-secondary focus:ring-secondary"
                             >
                                 <option>Selecione uma opção</option>
                                 <option
-                                    v-for="item in categories"
+                                    v-for="item in cursos"
                                     :key="item.id"
                                     :value="item.id"
                                 >
@@ -346,13 +364,13 @@ const addTurma = () => {
                         >
                         <div class="mt-2.5">
                             <select
-                                v-model="categoriaSelected"
-                                @change="form.instrutor_id = categoriaSelected"
+                                v-model="formadorSelected"
+                                @change="form.instrutor_id = formadorSelected"
                                 class="border rounded border-secondary focus:border-secondary focus:ring-secondary"
                             >
                                 <option>Selecione uma opção</option>
                                 <option
-                                    v-for="item in categories"
+                                    v-for="item in instrutor"
                                     :key="item.id"
                                     :value="item.id"
                                 >
