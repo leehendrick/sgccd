@@ -419,7 +419,10 @@ const validateDescricao = () => {
                     <SecondaryButton class="mx-2" @click="adicionarTurma">
                         Adicionar
                     </SecondaryButton>
-                    <SecondaryButton class="bg-red-600" @click="close">
+                    <SecondaryButton
+                        class="bg-red-600"
+                        @click="showForm = false"
+                    >
                         Cancel
                     </SecondaryButton>
                 </div>
