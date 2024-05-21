@@ -35,8 +35,14 @@ const form = useForm({
     status: null,
     descricao: "",
     curso_id: null,
+    instrutor_id: null,
     horario_id: null,
 });
+const showForm = ref(false);
+
+const addTurma = () => {
+    showForm.value = true;
+};
 </script>
 
 <template>
@@ -49,7 +55,9 @@ const form = useForm({
                     </h1>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <primary-button type="button">Add turma</primary-button>
+                    <primary-button type="button" @click="addTurma"
+                        >Add turma</primary-button
+                    >
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                     <input
@@ -423,7 +431,7 @@ const form = useForm({
                     </div>
                 </div>
                 <div class="m-5 flex justify-end">
-                    <SecondaryButton class="mx-2" @click="adicionarCurso">
+                    <SecondaryButton class="mx-2" @click="adicionarTurma">
                         Adicionar
                     </SecondaryButton>
                     <SecondaryButton class="bg-red-600" @click="close">
