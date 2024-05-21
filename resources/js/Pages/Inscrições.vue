@@ -39,7 +39,8 @@ const Toast = Swal.mixin({
 });
 
 const submit = () => {
-    form.post("inscricoes/create", {
+    form.processing = true;
+    form.post("inscricoes", {
         onError: () => {
             Toast.fire({
                 icon: "error",
@@ -55,6 +56,7 @@ const submit = () => {
                 showConfirmButton: true,
                 position: "center",
             });
+            form.reset();
         },
     });
 };
