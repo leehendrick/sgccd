@@ -78,7 +78,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cursos', [CursosController::class, 'courses'])->name('cursos');
     Route::get('/cursos/edit', [CursosController::class, 'edit'])->name('cursos.edit');
     Route::post('/cursos/create', [CursosController::class, 'store'])->name('cursos.store');
-    Route::patch('/cursos/update', [CursosController::class, 'update'])->name('cursos.update');
+    Route::patch('/cursos/{id}', [CursosController::class, 'update'])->name('cursos.update');
 });
 
 
