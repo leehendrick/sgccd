@@ -41,7 +41,7 @@ Route::get('inscricoes', function () {
    ]);
 })->name('page.inscricoes');
 
-Route::post('inscricoes/create', [
+Route::post('inscricoes', [
     StudentController::class, 'store'
 ]);
 
