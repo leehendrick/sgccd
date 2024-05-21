@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\CursosController;
+use App\Http\Controllers\InstrutorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Models\Courses;
@@ -83,6 +84,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('turmas', [ClassesController::class, 'getTurmas'])->name('turmas.index');
+    Route::get('turmas/instrutores', [ClassesController::class, 'getInstrutor'])->name('instrutores.index');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('instrutores', [InstrutorController::class, 'index'])->name('instrutores.index');
 });
 
 
